@@ -1,3 +1,7 @@
 <resources>
+    <string name="button">Button</string>
+    <string name="title_activity_account_sumaries_">AccountSumaries_Activity</string>
+    <string name="title_activity_account_groups_">AccountGroups_Activity</string>
+    <string name="title_activity_settings_">Settings_Activity</string>
     <string name="app_name">Backpack</string>
 </resources>

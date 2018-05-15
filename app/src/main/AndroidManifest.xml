@@ -23,6 +23,20 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".AnexarFicheiro"></activity>
+        <activity android:name=".MenuPage" />
+        <activity android:name=".Account_Activity" />
+        <activity
+            android:name=".AccountSumaries_Activity"
+            android:label="@string/title_activity_account_sumaries_"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AccountGroups_Activity"
+            android:label="@string/title_activity_account_groups_"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Settings_Activity"
+            android:label="@string/title_activity_settings_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
