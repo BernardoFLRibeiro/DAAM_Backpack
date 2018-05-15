@@ -8,21 +8,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-public class MenuPage extends AppCompatActivity {
-
+public class Account_Activity extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     private int position = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_page);
-
+        setContentView(R.layout.activity_account_);
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         dl.addDrawerListener(t);
         nv = (NavigationView) findViewById(R.id.nv_view);
@@ -64,7 +60,7 @@ public class MenuPage extends AppCompatActivity {
 
         switch (position) {
             case 1:
-                startActivity( new Intent(getApplicationContext(), Account_Activity.class));
+                startActivity(new Intent(getApplicationContext(), Account_Activity.class));
                 break;
             case 2:
                 startActivity( new Intent(getApplicationContext(), AccountSumaries_Activity.class));
