@@ -4,4 +4,7 @@
     <string name="title_activity_account_groups_">AccountGroups_Activity</string>
     <string name="title_activity_settings_">Settings_Activity</string>
     <string name="app_name">Backpack</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>

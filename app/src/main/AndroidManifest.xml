@@ -28,15 +28,15 @@
         <activity
             android:name=".AccountSumaries_Activity"
             android:label="@string/title_activity_account_sumaries_"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".AccountGroups_Activity"
             android:label="@string/title_activity_account_groups_"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Settings_Activity"
             android:label="@string/title_activity_settings_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

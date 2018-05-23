@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MenuPage {
 
 
 
@@ -15,8 +15,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-        //    final View myLayout = findViewById(R.id.startscreen);
-            new Handler().postDelayed(new Runnable() {
+
+            createListen();
+            setupDrawer();
+            //    final View myLayout = findViewById(R.id.startscreen);
+      /*      new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Intent i = new Intent(MainActivity.this, MenuPage.class);
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, TIME_OUT);
         }
-/*
+
     private void database() {
 
         // Write a message to the database
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 // Log.w(TAG, "Failed to read value.", error.toException());
             }
         });*/
-
+        }
     public void goToAnexar(View view){
         Intent intent = new Intent(MainActivity.this, AnexarFicheiro.class);
         startActivity(intent);
