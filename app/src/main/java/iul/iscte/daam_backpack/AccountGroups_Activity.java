@@ -25,7 +25,7 @@ public class AccountGroups_Activity extends MenuPage {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_groups_);
-
+       getSupportActionBar().setTitle("My Groups");
         createListen();
         setupDrawer();
 

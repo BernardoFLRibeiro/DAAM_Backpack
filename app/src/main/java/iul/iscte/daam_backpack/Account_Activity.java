@@ -19,7 +19,7 @@ public class Account_Activity extends MenuPage {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_);
-
+        getSupportActionBar().setTitle("My Account");
         createListen();
         setupDrawer();
     }

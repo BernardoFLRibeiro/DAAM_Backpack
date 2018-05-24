@@ -24,7 +24,7 @@ public class AccountSumaries_Activity extends MenuPage {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_sumaries_);
-
+        getSupportActionBar().setTitle("My Summaries");
         createListen();
         setupDrawer();
 
