@@ -24,6 +24,7 @@ public class AccountSumaries_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_sumaries_);
+
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         dl.addDrawerListener(t);
         nv = (NavigationView) findViewById(R.id.nv_view);
@@ -59,6 +60,11 @@ public class AccountSumaries_Activity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void funcionaCaralho(View view){
+        Intent myIntent = new Intent(AccountSumaries_Activity.this, Search.class);
+        startActivity(myIntent);
     }
 
     private void selectItem() {
