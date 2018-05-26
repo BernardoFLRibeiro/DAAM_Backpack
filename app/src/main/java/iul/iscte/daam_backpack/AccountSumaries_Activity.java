@@ -24,9 +24,13 @@ public class AccountSumaries_Activity extends MenuPage {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_sumaries_);
-        getSupportActionBar().setTitle("My Summaries");
+        getSupportActionBar().setTitle("Os meus Ficheiros");
         createListen();
         setupDrawer();
 
+    }
+    public void goToAnexar(View view){
+        Intent intent = new Intent(AccountSumaries_Activity.this, AnexarFicheiro.class);
+        startActivity(intent);
     }
 }

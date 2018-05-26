@@ -49,6 +49,9 @@ public class AnexarFicheiro extends MenuPage {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anexar_ficheiro);
 
+        createListen();
+        setupDrawer();
+
         mProgressDialog = new ProgressDialog(this);
         mImageView  = (ImageView) findViewById(R.id.image_uploaded);
         mStorageReference = FirebaseStorage.getInstance().getReference();

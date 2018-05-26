@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,14 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
 
 public class MenuPage extends AppCompatActivity {
 
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-    private int position = 0;
+    private int position = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +42,9 @@ public class MenuPage extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     int id = item.getItemId();
                     switch (id) {
+                        case R.id.nav_home:
+                            position = 0;
+                            break;
                         case R.id.nav_account:
                             position = 1;
                             break;
@@ -63,7 +65,7 @@ public class MenuPage extends AppCompatActivity {
                             position = 5;
                             break;
                     }
-                    if (!(position == 0)) {
+                    if (!(position == -1)) {
                         selectItem();
                     }
                     return false;
@@ -75,6 +77,9 @@ public class MenuPage extends AppCompatActivity {
         public void selectItem () {
 
             switch (position) {
+                case 0:
+                    startActivity(new Intent(getApplicationContext(), HomePage.class));
+                    break;
                 case 1:
                     startActivity(new Intent(getApplicationContext(), Account_Activity.class));
                     break;

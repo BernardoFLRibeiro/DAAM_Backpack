@@ -23,7 +23,7 @@ public class Settings_Activity extends MenuPage {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_);
-        getSupportActionBar().setTitle("My Settings");
+        getSupportActionBar().setTitle("Definições");
         createListen();
         setupDrawer();
     }

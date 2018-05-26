@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class Account_Activity extends MenuPage {
@@ -19,8 +20,10 @@ public class Account_Activity extends MenuPage {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_);
-        getSupportActionBar().setTitle("My Account");
+        getSupportActionBar().setTitle("A Minha Conta");
         createListen();
         setupDrawer();
     }
+
+
 }
