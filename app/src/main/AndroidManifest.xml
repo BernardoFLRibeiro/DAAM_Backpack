@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="iul.iscte.daam_backpack">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +22,23 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login" />
+        <activity android:name=".AnexarFicheiro" />
+        <activity android:name=".MenuPage" />
+        <activity android:name=".Account_Activity" />
+        <activity
+            android:name=".AccountSumaries_Activity"
+            android:label="@string/title_activity_account_sumaries_"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AccountGroups_Activity"
+            android:label="@string/title_activity_account_groups_"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Settings_Activity"
+            android:label="@string/title_activity_settings_"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Regist" />
+        <activity android:name=".HomePage" />
         <activity android:name=".Registo" />
         <activity android:name=".Perfil"></activity>
     </application>

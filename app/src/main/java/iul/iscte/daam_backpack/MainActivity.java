@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MenuPage {
 
     private FirebaseAuth auth;
     private EditText email, password;
@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        createListen();
+        setupDrawer();
 
         auth = FirebaseAuth.getInstance();
 
