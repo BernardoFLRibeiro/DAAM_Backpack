@@ -6,62 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/changeEmailBT"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/changeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Alterar Email"
-            app:layout_constraintBottom_toTopOf="@+id/changeNameBT"
+            android:text="Alterar"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/lv_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.028"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.655" />
+            app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/changeNameBT"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Alterar Nome"
-            app:layout_constraintBottom_toTopOf="@+id/changeUniBT"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/changeUniBT"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Alterar Universidade"
-            app:layout_constraintBottom_toTopOf="@+id/changePasswordBT"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/changePasswordBT"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="80dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Alterar Password"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <ListView
+            android:id="@+id/lv_view"
+            android:layout_width="match_parent"
+            android:layout_height="403dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
