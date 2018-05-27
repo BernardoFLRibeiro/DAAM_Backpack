@@ -1,9 +1,11 @@
 package iul.iscte.daam_backpack;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText email, password;
     private TextView userRegistration;
     private Button login;
+    private FirebaseUser user;
+    private FirebaseDatabase mFireDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +48,29 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login_bt);
 
 
-// funciona mas preciso de testar o login
-//        FirebaseUser user = auth.getCurrentUser();
-//
-//        if(user != null){
-//            finish();
-//            startActivity(new Intent(MainActivity.this, Perfil.class));
-//        }
+        // funciona mas preciso de testar o login
+        user = auth.getCurrentUser();
+        Log.d("tag email", user.getEmail());
+        Log.d("tag uid", user.getUid());
+
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userNameRef = rootRef.child("users").child(user.getUid());
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    finish();
+                    startActivity(new Intent(MainActivity.this, Perfil.class));
+                }else{
+                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,17 +99,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, Perfil.class));
                 } else{
                     Toast.makeText(MainActivity.this, " Login Failed", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
-
     }
-
-
-
-
-
-
 
 }
