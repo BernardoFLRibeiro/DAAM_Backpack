@@ -154,7 +154,7 @@ public class Registo extends AppCompatActivity {
         if (TextUtils.isEmpty(userId)) {
             userId = mFirebaseDatabase.push().getKey();
         }
-
+        //cria o utilizador no Firebase
         Utilizador user = new Utilizador(name, email, university);
         mFirebaseDatabase.child(userId).setValue(user);
 
