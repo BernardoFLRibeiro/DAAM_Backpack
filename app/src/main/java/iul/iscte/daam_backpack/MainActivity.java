@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class MainActivity extends MenuPage {
+public class MainActivity extends AppCompatActivity{
 
     private FirebaseAuth auth;
     private EditText email, password;
@@ -36,44 +36,44 @@ public class MainActivity extends MenuPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        createListen();
-        setupDrawer();
+        //getSupportActionBar().setTitle("Login");
 
         auth = FirebaseAuth.getInstance();
 
         email =  findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
         userRegistration = findViewById(R.id.newUser);
-
         login = findViewById(R.id.login_bt);
 
 
         // funciona mas preciso de testar o login
         user = auth.getCurrentUser();
-        Log.d("tag email", user.getEmail());
-        Log.d("tag uid", user.getUid());
+        //Log.d("tag email", user.getEmail());
+        //Log.d("tag uid", user.getUid());
 
-
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userNameRef = rootRef.child("users").child(user.getUid());
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    finish();
-                    startActivity(new Intent(MainActivity.this, Perfil.class));
-                }else{
-                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+        if (user != null) {
+            Log.d("tag email", user.getEmail());
+            Log.d("tag uid", user.getUid());
+            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference userNameRef = rootRef.child("users").child(user.getUid());
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        finish();
+                        startActivity(new Intent(MainActivity.this, HomePage.class));
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        };
-        userNameRef.addListenerForSingleValueEvent(eventListener);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+
+            };
+            userNameRef.addListenerForSingleValueEvent(eventListener);
+        }
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +99,7 @@ public class MainActivity extends MenuPage {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(MainActivity.this, " Login Sucessfull", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, Perfil.class));
+                    startActivity(new Intent(MainActivity.this, HomePage.class));
                 } else{
                     Toast.makeText(MainActivity.this, " Login Failed", Toast.LENGTH_SHORT).show();
                 }
