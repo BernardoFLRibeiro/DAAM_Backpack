@@ -1,8 +1,6 @@
 package iul.iscte.daam_backpack;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -18,6 +16,9 @@ public class MainActivity extends MenuPage {
 
             createListen();
             setupDrawer();
+
+
+
             //    final View myLayout = findViewById(R.id.startscreen);
       /*      new Handler().postDelayed(new Runnable() {
                 @Override
@@ -55,7 +56,7 @@ public class MainActivity extends MenuPage {
         });*/
         }
     public void goToAnexar(View view){
-        Intent intent = new Intent(MainActivity.this, AnexarFicheiro.class);
+        Intent intent = new Intent(MainActivity.this, AnexarFicheiro_Activity.class);
         startActivity(intent);
     }
 }
