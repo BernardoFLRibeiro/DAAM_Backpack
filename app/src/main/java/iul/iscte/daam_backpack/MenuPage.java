@@ -14,6 +14,8 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.Serializable;
+
 
 public class MenuPage extends AppCompatActivity {
 
@@ -28,6 +30,7 @@ public class MenuPage extends AppCompatActivity {
         setContentView(R.layout.activity_menu_page);
 
     }
+
 
     public void createListen() {
 
@@ -79,71 +82,71 @@ public class MenuPage extends AppCompatActivity {
 
     public void selectItem() {
 
-            switch (position) {
-                case 0:
-                    startActivity(new Intent(getApplicationContext(), HomePage.class));
-                    break;
-                case 1:
-                    startActivity(new Intent(getApplicationContext(), Account_Activity.class));
-                    break;
-                case 2:
-                    startActivity(new Intent(getApplicationContext(), AccountSumaries_Activity.class));
-                    break;
-                case 3:
-                    startActivity(new Intent(getApplicationContext(), AccountGroups_Activity.class));
-                    break;
-                case 4:
-                    startActivity(new Intent(getApplicationContext(), Settings_Activity.class));
-                    break;
-                case 5:
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                    break;
+        switch (position) {
+            case 0:
+                startActivity(new Intent(getApplicationContext(), HomePage.class));
+                break;
+            case 1:
+                startActivity(new Intent(getApplicationContext(), Account_Activity.class));
+                break;
+            case 2:
+                startActivity(new Intent(getApplicationContext(), AccountSumaries_Activity.class));
+                break;
+            case 3:
+                startActivity(new Intent(getApplicationContext(), AccountGroups_Activity.class));
+                break;
+            case 4:
+                  startActivity(new Intent(getApplicationContext(), Settings_Activity.class));
+                break;
+            case 5:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+                break;
 
         }
     }
 
 
-        public void setupDrawer () {
-            t = new ActionBarDrawerToggle(this, dl, R.string.drawer_open, R.string.drawer_close) {
+    public void setupDrawer() {
+        t = new ActionBarDrawerToggle(this, dl, R.string.drawer_open, R.string.drawer_close) {
 
-                public void onDrawerOpened(View drawerView) {
-                    super.onDrawerOpened(drawerView);
-                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-                }
-
-
-                public void onDrawerClosed(View view) {
-                    super.onDrawerClosed(view);
-                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-                }
-            };
-            t.setDrawerIndicatorEnabled(true);
-            //dl.setDrawerListener(t);
-        }
-
-        @Override
-        protected void onPostCreate (Bundle savedInstanceState){
-            super.onPostCreate(savedInstanceState);
-            t.syncState();
-        }
-
-        @Override
-        public void onConfigurationChanged (Configuration newConfig){
-            super.onConfigurationChanged(newConfig);
-            t.onConfigurationChanged(newConfig);
-        }
-
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            if (t.onOptionsItemSelected(item)) {
-                return true;
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
-            // Handle your other action bar items...
 
-            return super.onOptionsItemSelected(item);
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        t.setDrawerIndicatorEnabled(true);
+        //dl.setDrawerListener(t);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        t.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        t.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (t.onOptionsItemSelected(item)) {
+            return true;
         }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onBackPressed() {

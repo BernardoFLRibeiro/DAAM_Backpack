@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
+
                         startActivity(new Intent(MainActivity.this, HomePage.class));
                         finish();
                     }

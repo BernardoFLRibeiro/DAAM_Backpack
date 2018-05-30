@@ -25,10 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 public class Registo extends AppCompatActivity {
 
 
-    private EditText username, useremail, userpassword, userpasswordagain, useruniversity;
+    private EditText username, useremail, userpassword, userpasswordagain, useruniversity,usercourse;
     private Button Registo;
     private FirebaseAuth firebaseAuth;
-    private String user_name, user_password, user_university, user_email;
+    private String user_name, user_password, user_university, user_course,user_email;
     private DB database;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -54,6 +54,7 @@ public class Registo extends AppCompatActivity {
                     user_email = useremail.getText().toString().trim();
                     user_name = username.getText().toString().trim();
                     user_university = useruniversity.getText().toString().trim();
+                    user_course = usercourse.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -82,6 +83,7 @@ public class Registo extends AppCompatActivity {
         useremail = (EditText) findViewById(R.id.et_email);
         userpasswordagain = (EditText) findViewById(R.id.et_retype_password);
         useruniversity = (EditText) findViewById(R.id.et_university);
+        usercourse = (EditText) findViewById(R.id.et_course);
 
         Registo = (Button) findViewById(R.id.btn_registo);
 
@@ -140,7 +142,7 @@ public class Registo extends AppCompatActivity {
                 // update toolbar title
                 getSupportActionBar().setTitle(appTitle);
 
-                createUser(user_name, user_email, user_password,user_university);
+                createUser(user_name, user_email, user_password,user_course,user_university);
             }
 
             @Override
@@ -149,14 +151,14 @@ public class Registo extends AppCompatActivity {
         });
     }
 
-    private void createUser(String name, String email,String password, String university) {
+    private void createUser(String name, String email,String password,String course, String university) {
 
         if (TextUtils.isEmpty(userId)) {
 
            userId = mFirebaseDatabase.push().getKey();
         }
         //cria o utilizador no Firebase
-        Utilizador user = new Utilizador(name, email, password, university);
+        Utilizador user = new Utilizador(name, email, password,course, university);
         String key = email.replaceAll(".","").replace("@","");
         mFirebaseDatabase.child(userId).setValue(user);
 

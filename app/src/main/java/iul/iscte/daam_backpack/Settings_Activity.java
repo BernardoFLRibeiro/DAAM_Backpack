@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,16 +47,20 @@ public class Settings_Activity extends MenuPage {
     private String resultpop;
     private String[] listItems;
 
-    private boolean b = false;
+    private FirebaseDatabase db;
+    private DatabaseReference ref;
+
+    private String name, email, university;
+    private Utilizador utilizador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_);
-        fill();
         getSupportActionBar().setTitle("Definições");
         createListen();
         setupDrawer();
+        fill();
     }
 
     private void fill() {
@@ -73,25 +78,18 @@ public class Settings_Activity extends MenuPage {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
-                changeValues(selectedItem);
+                changeInformation(selectedItem);
             }
         });
     }
 
-    private void changeValues(String info) {
-        final String temp = info;
-        changeInformation(info);
-
- /*       if (temp.equals("Password")) {
-            checkPassword();
-        } else {
-            changeInformation(info);
-        }*/
-    }
 
     private void changeInformation(String info) {
-        final String typeToChange = getType(info);
-        makeAlertDialog();
+        final String typeToChange = setType(info);
+        String result = getData(typeToChange);
+        TextView tv = (TextView) findViewById(R.id.changeTV);
+        tv.append("");
+        // makeAlertDialog();
     }
 
     private void makeAlertDialog() {
@@ -121,7 +119,7 @@ public class Settings_Activity extends MenuPage {
         alertDialog.show();
     }
 
-    private String getType(String info) {
+    private String setType(String info) {
         String result = "";
         switch (info) {
             case "Nome":
@@ -140,5 +138,51 @@ public class Settings_Activity extends MenuPage {
         return result;
     }
 
+
+    private String getData(String r) {
+
+        String result = "";
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference();
+        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Utilizador u = ds.getValue(Utilizador.class);
+                    if (u.getEmail().equals(email)) {
+                        Log.d("tag email", u.getEmail());
+                        Log.d("tag name", u.getNome());
+                        Log.d("tag university", u.getUniversity());
+                        name = (u.getNome());
+                        email = (u.getEmail());
+                        university = (u.getUniversity());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        switch (r) {
+            case "nome":
+                result = name;
+                break;
+            case "course":
+                result = email;
+                break;
+            case "university":
+                result = university;
+                break;
+            case "password":
+                result = "";
+                break;
+        }
+        return result;
+    }
 
 }

@@ -75,7 +75,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
+            <TextView
+                android:id="@+id/tv_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Course" />
+
+            <EditText
+                android:id="@+id/et_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="none|textPersonName" />
 
             <TextView
                 android:id="@+id/tv_university"
