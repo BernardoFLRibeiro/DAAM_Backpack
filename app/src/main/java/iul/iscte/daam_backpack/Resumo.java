@@ -8,15 +8,17 @@ public class Resumo {
     private String Cadeira;
     private String Universidade;
     private int TotalFotos;
+    private String UserId;
 
     public Resumo(){
     }
 
-    public Resumo(String nome, String cadeira, String universidade, int totalFotos){
+    public Resumo(String nome, String cadeira, String universidade, int totalFotos, String userid){
         this.Nome = nome;
         this.Cadeira = cadeira;
         this.Universidade = universidade;
         this.TotalFotos = totalFotos;
+        this.UserId = userid;
 
     }
 
@@ -50,5 +52,13 @@ public class Resumo {
 
     public void setTotalFotos(int totalFotos) {
         TotalFotos = totalFotos;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
+    }
+
+    public String getUserId() {
+        return UserId;
     }
 }
