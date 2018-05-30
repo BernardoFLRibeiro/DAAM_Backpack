@@ -50,7 +50,7 @@ public class Settings_Activity extends MenuPage {
     private FirebaseDatabase db;
     private DatabaseReference ref;
 
-    private String name, email, university;
+    private String name, email, university,course;
     private Utilizador utilizador;
 
     @Override
@@ -60,17 +60,17 @@ public class Settings_Activity extends MenuPage {
         getSupportActionBar().setTitle("Definições");
         createListen();
         setupDrawer();
-        fill();
+        setupList();
     }
 
-    private void fill() {
+    private void setupList() {
         listItems = new String[]{
                 "Nome",
                 "Curso",
                 "Universidade",
                 "Password"
         };
-        List<String> settings_list = new ArrayList<String>(Arrays.asList(listItems));
+      //  List<String> settings_list = new ArrayList<String>(Arrays.asList(listItems));
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
         ListView mListView = (ListView) findViewById(R.id.lv_view);
         mListView.setAdapter(adapter);
@@ -84,13 +84,79 @@ public class Settings_Activity extends MenuPage {
     }
 
 
-    private void changeInformation(String info) {
-        final String typeToChange = setType(info);
-        String result = getData(typeToChange);
+    private void changeInformation(String itemClicked) {
+        String typeToChange = setType(itemClicked); //transforma o nome do que se quer mudar no nome que esta na database
+        String result = getData(typeToChange); //vai buscar o valor atual do campo que se quer alterar a database do Firebase
         TextView tv = (TextView) findViewById(R.id.changeTV);
-        tv.append("");
+        tv.append("-"+result);// mostra esse campo no TextView
         // makeAlertDialog();
     }
+
+    private String setType(String info) {
+        String result = "";
+        switch (info) {
+            case "Nome":
+                result = "nome";
+                break;
+            case "Curso":
+                result = "course";
+                break;
+            case "Universidade":
+                result = "university";
+                break;
+            case "Password":
+                result = "password";
+                break;
+        }
+        return result;
+    }
+
+    private String getData(String typeToChange) {
+        String result = "";
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference();
+        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Utilizador u = ds.getValue(Utilizador.class);
+                    if (u.getEmail().equals(email)) {
+                        Log.d("tag email", u.getEmail());
+                        Log.d("tag name", u.getNome());
+                        Log.d("tag university", u.getUniversity());
+                        name = (u.getNome());
+                        email = (u.getEmail());
+                        university = (u.getUniversity());
+                        course = (u.getCourse());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        switch (typeToChange) {
+            case "nome":
+                result = name;
+                break;
+            case "course":
+                result = course;
+                break;
+            case "university":
+                result = university;
+                break;
+            case "password":
+                result = "";
+                break;
+        }
+        return result;
+    }
+
 
     private void makeAlertDialog() {
 
@@ -119,70 +185,5 @@ public class Settings_Activity extends MenuPage {
         alertDialog.show();
     }
 
-    private String setType(String info) {
-        String result = "";
-        switch (info) {
-            case "Nome":
-                result = "nome";
-                break;
-            case "Curso":
-                result = "course";
-                break;
-            case "Universidade":
-                result = "university";
-                break;
-            case "Password":
-                result = "password";
-                break;
-        }
-        return result;
-    }
-
-
-    private String getData(String r) {
-
-        String result = "";
-        db = FirebaseDatabase.getInstance();
-        ref = db.getReference();
-        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
-            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Utilizador u = ds.getValue(Utilizador.class);
-                    if (u.getEmail().equals(email)) {
-                        Log.d("tag email", u.getEmail());
-                        Log.d("tag name", u.getNome());
-                        Log.d("tag university", u.getUniversity());
-                        name = (u.getNome());
-                        email = (u.getEmail());
-                        university = (u.getUniversity());
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        switch (r) {
-            case "nome":
-                result = name;
-                break;
-            case "course":
-                result = email;
-                break;
-            case "university":
-                result = university;
-                break;
-            case "password":
-                result = "";
-                break;
-        }
-        return result;
-    }
 
 }
