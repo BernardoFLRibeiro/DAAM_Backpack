@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class MenuPage extends AppCompatActivity {
 
@@ -91,6 +93,10 @@ public class MenuPage extends AppCompatActivity {
                     break;
                 case 4:
                     startActivity(new Intent(getApplicationContext(), Settings_Activity.class));
+                    break;
+                case 5:
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     break;
             }
         }

@@ -63,7 +63,7 @@ public class Registo extends AppCompatActivity {
                                 saveToDatabse();
                                 database.insertUser(user_name, user_email, user_university);
                                 Toast.makeText(Registo.this, "Sucesso", Toast.LENGTH_LONG);
-                                startActivity(new Intent(Registo.this, Perfil.class));
+                                startActivity(new Intent(Registo.this, HomePage.class));
                             }else {
                                 Toast.makeText(Registo.this, "Falhou", Toast.LENGTH_LONG);
                             }
