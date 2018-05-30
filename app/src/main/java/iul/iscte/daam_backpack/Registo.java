@@ -61,7 +61,7 @@ public class Registo extends AppCompatActivity {
                             if(task.isSuccessful()){
 //                              sendUserData();
                                 saveToDatabse();
-                                database.insertUser(user_name, user_email, user_university);
+                                database.insertUser(user_name, user_email,user_password, user_university);
                                 Toast.makeText(Registo.this, "Sucesso", Toast.LENGTH_LONG);
                                 startActivity(new Intent(Registo.this, Perfil.class));
                             }else {
@@ -140,7 +140,7 @@ public class Registo extends AppCompatActivity {
                 // update toolbar title
                 getSupportActionBar().setTitle(appTitle);
 
-                createUser(user_name, user_email, user_university);
+                createUser(user_name, user_email, user_password,user_university);
             }
 
             @Override
@@ -149,13 +149,15 @@ public class Registo extends AppCompatActivity {
         });
     }
 
-    private void createUser(String name, String email, String university) {
+    private void createUser(String name, String email,String password, String university) {
 
         if (TextUtils.isEmpty(userId)) {
-            userId = mFirebaseDatabase.push().getKey();
+
+           userId = mFirebaseDatabase.push().getKey();
         }
         //cria o utilizador no Firebase
-        Utilizador user = new Utilizador(name, email, university);
+        Utilizador user = new Utilizador(name, email, password, university);
+        String key = email.replaceAll(".","").replace("@","");
         mFirebaseDatabase.child(userId).setValue(user);
 
     }

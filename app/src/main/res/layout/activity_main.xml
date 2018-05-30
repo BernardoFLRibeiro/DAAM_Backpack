@@ -35,7 +35,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="160dp"
         android:ems="10"
-        android:inputType="textEmailSubject"
+        android:inputType="textEmailAddress"
         android:selectAllOnFocus="false"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"

@@ -41,11 +41,12 @@ public class DB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertUser(String name, String email, String university) {
+    public boolean insertUser(String name, String email, String Password,String university) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("email", email);
+        contentValues.put("Password", Password);
         contentValues.put("university", university);
         db.insert("user", null, contentValues);
         return true;

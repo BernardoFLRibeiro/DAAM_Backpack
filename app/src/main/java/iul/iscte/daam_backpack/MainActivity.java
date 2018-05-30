@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private EditText email, password;
@@ -37,22 +37,15 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //getSupportActionBar().setTitle("Login");
-
         auth = FirebaseAuth.getInstance();
 
-        email =  findViewById(R.id.emailLogin);
+        email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
         userRegistration = findViewById(R.id.newUser);
         login = findViewById(R.id.login_bt);
 
-
         // funciona mas preciso de testar o login
         user = auth.getCurrentUser();
-        //Log.d("tag email", user.getEmail());
-        //Log.d("tag uid", user.getUid());
-
         if (user != null) {
             Log.d("tag email", user.getEmail());
             Log.d("tag uid", user.getUid());
@@ -62,11 +55,10 @@ public class MainActivity extends AppCompatActivity{
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        finish();
                         startActivity(new Intent(MainActivity.this, HomePage.class));
+                        finish();
                     }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
@@ -74,37 +66,38 @@ public class MainActivity extends AppCompatActivity{
             };
             userNameRef.addListenerForSingleValueEvent(eventListener);
         }
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateLogin(email.getText().toString(), password.getText().toString());
             }
         });
-
         userRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(MainActivity.this, Registo.class));
+                finish();
             }
         });
-
-
     }
 
-    private void validateLogin(String email, String password){
+    private void validateLogin(String email, String password) {
 
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, " Login Sucessfull", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, HomePage.class));
-                } else{
+                } else {
                     Toast.makeText(MainActivity.this, " Login Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
     }
 
 }

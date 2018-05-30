@@ -37,7 +37,6 @@
             android:name=".Settings_Activity"
             android:label="@string/title_activity_settings_"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Regist" />
         <activity android:name=".HomePage" />
         <activity android:name=".Registo" />
         <activity android:name=".Perfil"></activity>
