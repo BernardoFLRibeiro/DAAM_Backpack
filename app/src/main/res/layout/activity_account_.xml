@@ -14,6 +14,22 @@
 
 
         <TextView
+            android:id="@+id/emailTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="356dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="My Email"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.225"
+            app:layout_constraintStart_toEndOf="@+id/accountIV"
+            app:layout_constraintTop_toBottomOf="@+id/nameTV" />
+
+        <TextView
             android:id="@+id/univerityTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,18 +47,15 @@
             android:id="@+id/nameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="356dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="40dp"
             android:text="My Name"
             android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.225"
             app:layout_constraintStart_toEndOf="@+id/accountIV"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.213" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/accountIV"
