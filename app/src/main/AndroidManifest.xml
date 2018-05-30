@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="iul.iscte.daam_backpack">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -38,6 +38,10 @@
             android:label="@string/title_activity_settings_"
             android:theme="@style/AppTheme" />
         <activity android:name=".CheckAnexo_Activity"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".HomePage" />
+        <activity android:name=".Registo" />
+        <activity android:name=".Perfil"></activity>
     </application>
 
 </manifest>

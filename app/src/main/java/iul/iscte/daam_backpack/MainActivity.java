@@ -1,62 +1,104 @@
 package iul.iscte.daam_backpack;
 
 import android.content.Intent;
+import android.nfc.Tag;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends MenuPage {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
+public class MainActivity extends AppCompatActivity {
 
-    int TIME_OUT = 4000; //Time to launch the another activity
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+    private FirebaseAuth auth;
+    private EditText email, password;
+    private TextView userRegistration;
+    private Button login;
+    private FirebaseUser user;
+    private FirebaseDatabase mFireDatabase;
 
-            createListen();
-            setupDrawer();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        auth = FirebaseAuth.getInstance();
 
+        email = findViewById(R.id.emailLogin);
+        password = findViewById(R.id.passwordLogin);
+        userRegistration = findViewById(R.id.newUser);
+        login = findViewById(R.id.login_bt);
 
-
-            //    final View myLayout = findViewById(R.id.startscreen);
-      /*      new Handler().postDelayed(new Runnable() {
+        // funciona mas preciso de testar o login
+        user = auth.getCurrentUser();
+        if (user != null) {
+            Log.d("tag email", user.getEmail());
+            Log.d("tag uid", user.getUid());
+            DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference userNameRef = rootRef.child("users").child(user.getUid());
+            ValueEventListener eventListener = new ValueEventListener() {
                 @Override
-                public void run() {
-                    Intent i = new Intent(MainActivity.this, MenuPage.class);
-                    startActivity(i);
-                    finish();
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+
+                        startActivity(new Intent(MainActivity.this, HomePage.class));
+                        finish();
+                    }
                 }
-            }, TIME_OUT);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+
+            };
+            userNameRef.addListenerForSingleValueEvent(eventListener);
         }
-
-    private void database() {
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                //  Log.d(TAG, "Value is: " + value);
+            public void onClick(View v) {
+                validateLogin(email.getText().toString(), password.getText().toString());
             }
-
+        });
+        userRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                // Log.w(TAG, "Failed to read value.", error.toException());
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this, Registo.class));
+                finish();
             }
-        });*/
-        }
-    public void goToAnexar(View view){
-        Intent intent = new Intent(MainActivity.this, AnexarFicheiro_Activity.class);
-        startActivity(intent);
+        });
     }
+
+    private void validateLogin(String email, String password) {
+
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, " Login Sucessfull", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, HomePage.class));
+                } else {
+                    Toast.makeText(MainActivity.this, " Login Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+    }
+
 }
