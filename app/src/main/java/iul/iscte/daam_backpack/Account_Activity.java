@@ -40,7 +40,7 @@ public class Account_Activity extends MenuPage {
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
         ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
-            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

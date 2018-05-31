@@ -25,10 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 public class Registo extends AppCompatActivity {
 
 
-    private EditText username, useremail, userpassword, userpasswordagain, useruniversity,usercourse;
+    private EditText username, useremail, userpassword, userpasswordagain, useruniversity, usercourse;
     private Button Registo;
     private FirebaseAuth firebaseAuth;
-    private String user_name, user_password, user_university, user_course,user_email;
+    private String user_name, user_password, user_university, user_course, user_email;
     private DB database;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -48,7 +48,7 @@ public class Registo extends AppCompatActivity {
         Registo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
+                if (validate()) {
                     //regista na base de dados do firebase
                     user_password = userpassword.getText().toString().trim();
                     user_email = useremail.getText().toString().trim();
@@ -59,13 +59,13 @@ public class Registo extends AppCompatActivity {
                     firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
 //                              sendUserData();
                                 saveToDatabse();
-                                database.insertUser(user_name, user_email,user_password, user_university);
+                                database.insertUser(user_name, user_email, user_password, user_university);
                                 Toast.makeText(Registo.this, "Sucesso", Toast.LENGTH_LONG);
                                 startActivity(new Intent(Registo.this, HomePage.class));
-                            }else {
+                            } else {
                                 Toast.makeText(Registo.this, "Falhou", Toast.LENGTH_LONG);
                             }
                         }
@@ -76,7 +76,7 @@ public class Registo extends AppCompatActivity {
 
     }
 
-    private void setup(){
+    private void setup() {
 
         username = (EditText) findViewById(R.id.et_nome);
         userpassword = (EditText) findViewById(R.id.et_password);
@@ -89,7 +89,7 @@ public class Registo extends AppCompatActivity {
 
     }
 
-    private boolean validate(){
+    private boolean validate() {
 
         Boolean result = false;
 
@@ -98,13 +98,12 @@ public class Registo extends AppCompatActivity {
         String email = useremail.getText().toString();
         String passwordagain = userpasswordagain.getText().toString();
 
-        if(name.isEmpty() || password.isEmpty() || email.isEmpty()){
+        if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "Campos não preenchidos", Toast.LENGTH_SHORT).show();
-            if( password != passwordagain){
+            if (password != passwordagain) {
                 Toast.makeText(this, "Passwords não são iguais", Toast.LENGTH_SHORT).show();
             }
-        }
-        else{
+        } else {
             result = true;
             Toast.makeText(this, "Registo Feito", Toast.LENGTH_SHORT).show();
         }
@@ -123,7 +122,7 @@ public class Registo extends AppCompatActivity {
 //        myRef.child("user").setValue(userProfile);
 //    }
 
-    private void saveToDatabse(){
+    private void saveToDatabse() {
         mFirebaseInstance = FirebaseDatabase.getInstance();
 
         // get reference to 'users' node
@@ -142,7 +141,7 @@ public class Registo extends AppCompatActivity {
                 // update toolbar title
                 getSupportActionBar().setTitle(appTitle);
 
-                createUser(user_name, user_email, user_password,user_course,user_university);
+                createUser(user_name, user_email, user_password, user_course, user_university);
             }
 
             @Override
@@ -151,15 +150,13 @@ public class Registo extends AppCompatActivity {
         });
     }
 
-    private void createUser(String name, String email,String password,String course, String university) {
+    private void createUser(String name, String email, String password, String course, String university) {
 
-        if (TextUtils.isEmpty(userId)) {
+        String key = email.replace(".", "").replace("@", "");
+        userId = key;
 
-           userId = mFirebaseDatabase.push().getKey();
-        }
-        //cria o utilizador no Firebase
-        Utilizador user = new Utilizador(name, email, password,course, university);
-        String key = email.replaceAll(".","").replace("@","");
+        Utilizador user = new Utilizador(name, email, password, course, university);
+
         mFirebaseDatabase.child(userId).setValue(user);
 
     }
