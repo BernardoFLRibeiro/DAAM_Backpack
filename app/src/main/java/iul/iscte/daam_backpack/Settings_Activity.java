@@ -58,9 +58,12 @@ public class Settings_Activity extends MenuPage {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_);
         getSupportActionBar().setTitle("Definições");
+
+        setupList();
+
         createListen();
         setupDrawer();
-        setupList();
+
     }
 
     private void setupList() {
@@ -115,7 +118,7 @@ public class Settings_Activity extends MenuPage {
         String result = "";
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
-        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
+        ref.child("users").addValueEventListener(new ValueEventListener() {
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             @Override

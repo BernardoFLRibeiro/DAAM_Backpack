@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="iul.iscte.daam_backpack">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,9 @@
         android:roundIcon="@drawable/backpack"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,11 +39,13 @@
             android:name=".Settings_Activity"
             android:label="@string/title_activity_settings_"
             android:theme="@style/AppTheme" />
-        <activity android:name=".CheckAnexo_Activity"></activity>
-            android:theme="@style/AppTheme" />
+        <activity android:name=".CheckAnexo_Activity" />
+        android:theme="@style/AppTheme" />
         <activity android:name=".HomePage" />
         <activity android:name=".Registo" />
-        <activity android:name=".Perfil"></activity>
+        <activity android:name=".Perfil" />
+        <activity android:name=".Search_Activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

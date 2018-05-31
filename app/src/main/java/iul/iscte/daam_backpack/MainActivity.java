@@ -26,18 +26,18 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseUser user;
     private FirebaseAuth auth;
     private EditText email, password;
     private TextView userRegistration;
     private Button login;
-    private FirebaseUser user;
     private FirebaseDatabase mFireDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        auth = FirebaseAuth.getInstance();
+
 
         email = findViewById(R.id.emailLogin);
         password = findViewById(R.id.passwordLogin);
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login_bt);
 
         // funciona mas preciso de testar o login
+        auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         if (user != null) {
             Log.d("tag email", user.getEmail());

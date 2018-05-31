@@ -8,15 +8,20 @@ public class Resumo {
     private String Cadeira;
     private String Universidade;
     private int TotalFotos;
+    private int Acessos = 0;
+    private long DataPublicacao;
+    private String UserId;
 
     public Resumo(){
     }
 
-    public Resumo(String nome, String cadeira, String universidade, int totalFotos){
+    public Resumo(String nome, String cadeira, String universidade, int totalFotos, String userid){
         this.Nome = nome;
         this.Cadeira = cadeira;
         this.Universidade = universidade;
         this.TotalFotos = totalFotos;
+        this.DataPublicacao = System.currentTimeMillis();
+        this.UserId = userid;
 
     }
 
@@ -50,5 +55,33 @@ public class Resumo {
 
     public void setTotalFotos(int totalFotos) {
         TotalFotos = totalFotos;
+    }
+
+    public void setDataPublicacao(long dataPublicacao) {
+        this.DataPublicacao = dataPublicacao;
+    }
+
+    public int getAcessos() {
+        return Acessos;
+    }
+
+    public void incrementAcessos(){
+        this.Acessos++;
+    }
+
+    public long getDataPublicacao() {
+        return DataPublicacao;
+    }
+
+    public void setAcessos(int nAcessos) {
+        this.Acessos = nAcessos;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 }

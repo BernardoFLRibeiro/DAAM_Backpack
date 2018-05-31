@@ -42,6 +42,9 @@ public class AccountSumaries_Activity extends MenuPage {
 
     private ListAnexoAdapter mAnexoListAdapter;
 
+    private FirebaseUser user;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,8 @@ public class AccountSumaries_Activity extends MenuPage {
 
         listaResumos = new ArrayList<Resumo>();
 
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
         showResumos();
 
@@ -79,7 +84,7 @@ public class AccountSumaries_Activity extends MenuPage {
 
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Resumo resumo = postSnapshot.getValue(Resumo.class);
-                    if (resumo.getCadeira().equals("TSIO")){
+                    if (resumo.getUserId().equals(user.getUid())){
                         listaResumos.add(resumo);
                     }
                 }
@@ -90,7 +95,7 @@ public class AccountSumaries_Activity extends MenuPage {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(AccountSumaries_Activity.this,"Ocorreu um erro testeeee!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountSumaries_Activity.this,"Ocorreu um erro!", Toast.LENGTH_SHORT).show();
             }
         };
 
