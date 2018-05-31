@@ -8,6 +8,8 @@ public class Resumo {
     private String Cadeira;
     private String Universidade;
     private int TotalFotos;
+    private int Acessos = 0;
+    private long DataPublicacao;
     private String UserId;
 
     public Resumo(){
@@ -18,6 +20,7 @@ public class Resumo {
         this.Cadeira = cadeira;
         this.Universidade = universidade;
         this.TotalFotos = totalFotos;
+        this.DataPublicacao = System.currentTimeMillis();
         this.UserId = userid;
 
     }
@@ -54,11 +57,31 @@ public class Resumo {
         TotalFotos = totalFotos;
     }
 
-    public void setUserId(String userId) {
-        UserId = userId;
+    public void setDataPublicacao(long dataPublicacao) {
+        this.DataPublicacao = dataPublicacao;
+    }
+
+    public int getAcessos() {
+        return Acessos;
+    }
+
+    public void incrementAcessos(){
+        this.Acessos++;
+    }
+
+    public long getDataPublicacao() {
+        return DataPublicacao;
+    }
+
+    public void setAcessos(int nAcessos) {
+        this.Acessos = nAcessos;
     }
 
     public String getUserId() {
         return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 }

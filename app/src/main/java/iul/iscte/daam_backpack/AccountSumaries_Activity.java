@@ -94,7 +94,7 @@ public class AccountSumaries_Activity extends MenuPage {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(AccountSumaries_Activity.this,"Ocorreu um erro testeeee!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountSumaries_Activity.this,"Ocorreu um erro!", Toast.LENGTH_SHORT).show();
             }
         };
 

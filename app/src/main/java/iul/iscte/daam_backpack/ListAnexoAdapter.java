@@ -2,8 +2,10 @@ package iul.iscte.daam_backpack;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class ListAnexoAdapter extends RecyclerView.Adapter<ListAnexoAdapter.ResumosViewHolder>{
 
     private ArrayList<Resumo> resumos;
+
+    public FirebaseDatabase database = FirebaseDatabase.getInstance();
+    public DatabaseReference myRef = database.getReference().child("Resumos");
 
     public ListAnexoAdapter(ArrayList<Resumo> resumos){
         this.resumos = resumos;
@@ -43,6 +56,24 @@ public class ListAnexoAdapter extends RecyclerView.Adapter<ListAnexoAdapter.Resu
         holder.mRegistoButao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                myRef.child(nomeResumo).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Resumo value = dataSnapshot.getValue(Resumo.class);
+                        if(value != null){
+                            value.incrementAcessos();
+                            dataSnapshot.getRef().setValue(value);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
                 Intent intent = new Intent(v.getContext() ,CheckAnexo_Activity.class);
                 intent.putExtra("nomeResumo", nomeResumo);
                 intent.putExtra("cadeiraResumo", cadeiraResumo);
