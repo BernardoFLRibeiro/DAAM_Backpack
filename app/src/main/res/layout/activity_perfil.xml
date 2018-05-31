@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".Perfil">
 
+    <ImageView
+        android:id="@+id/backlogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/login_background"
+        android:scaleType="fitCenter" />
     <TextView
         android:id="@+id/faculdade_perfil"
         android:layout_width="wrap_content"

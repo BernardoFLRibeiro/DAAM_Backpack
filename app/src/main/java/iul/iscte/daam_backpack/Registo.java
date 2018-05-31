@@ -24,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Registo extends AppCompatActivity {
 
-
     private EditText username, useremail, userpassword, userpasswordagain, useruniversity, usercourse;
     private Button Registo;
     private FirebaseAuth firebaseAuth;
@@ -33,7 +32,6 @@ public class Registo extends AppCompatActivity {
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private String userId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +53,6 @@ public class Registo extends AppCompatActivity {
                     user_name = username.getText().toString().trim();
                     user_university = useruniversity.getText().toString().trim();
                     user_course = usercourse.getText().toString().trim();
-
                     firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -98,20 +95,16 @@ public class Registo extends AppCompatActivity {
         String email = useremail.getText().toString();
         String passwordagain = userpasswordagain.getText().toString();
 
-        if(name.isEmpty() || password.isEmpty() || email.isEmpty()){
+        if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "Existem campos não preenchidos", Toast.LENGTH_SHORT).show();
-        }
-        else if (password.length() < 8){
+        } else if (password.length() < 8) {
             Toast.makeText(this, "Password tem que ter mais que 8 caracteres", Toast.LENGTH_SHORT).show();
-        }
-        else if(!password.equals(passwordagain)){
+        } else if (!password.equals(passwordagain)) {
             Toast.makeText(this, "Passwords não são iguais", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             result = true;
             Toast.makeText(this, "Registo Feito", Toast.LENGTH_SHORT).show();
         }
-
         return result;
     }
 
@@ -163,6 +156,13 @@ public class Registo extends AppCompatActivity {
 
         mFirebaseDatabase.child(userId).setValue(user);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
     }
 
 }

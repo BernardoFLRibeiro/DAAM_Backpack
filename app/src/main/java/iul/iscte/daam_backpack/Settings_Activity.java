@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Settings_Activity extends MenuPage {
     private String[] listItems;
 
-    private FirebaseDatabase db;
+       private FirebaseDatabase db;
     private DatabaseReference ref;
 
     @Override
@@ -49,7 +49,6 @@ public class Settings_Activity extends MenuPage {
                 "Universidade",
 
         };
-        //  List<String> settings_list = new ArrayList<String>(Arrays.asList(listItems));
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
         ListView mListView = (ListView) findViewById(R.id.lv_view);
         mListView.setAdapter(adapter);
@@ -162,29 +161,6 @@ public class Settings_Activity extends MenuPage {
     }
 
 
-    public void mudarNome(View view) {
-        db = FirebaseDatabase.getInstance();
-        ref = db.getReference();
-        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
-            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Utilizador u = ds.getValue(Utilizador.class);
-                    if (u.getEmail().equals(email)) {
-                        TextView tv = (TextView) findViewById(R.id.changeTV);
-                        tv.append("-" + u.getNome());
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-
 }
+
+
