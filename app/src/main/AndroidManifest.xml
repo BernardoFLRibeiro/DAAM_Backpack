@@ -14,34 +14,45 @@
         android:roundIcon="@drawable/backpack"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".AnexarFicheiro_Activity" />
-        <activity android:name=".MenuPage" />
-        <activity android:name=".Account_Activity" />
+        <activity android:name=".Login"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AnexarFicheiro_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MenuPage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Account_Activity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AccountSumaries_Activity"
             android:label="@string/title_activity_account_sumaries_"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AccountGroups_Activity"
             android:label="@string/title_activity_account_groups_"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Settings_Activity"
             android:label="@string/title_activity_settings_"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".CheckAnexo_Activity"></activity>
-            android:theme="@style/AppTheme" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".Registo" />
-        <activity android:name=".Perfil"></activity>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CheckAnexo_Activity"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HomePage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Registo"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Perfil"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

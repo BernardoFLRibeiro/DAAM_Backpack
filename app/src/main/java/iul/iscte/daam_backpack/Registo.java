@@ -98,12 +98,16 @@ public class Registo extends AppCompatActivity {
         String email = useremail.getText().toString();
         String passwordagain = userpasswordagain.getText().toString();
 
-        if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
-            Toast.makeText(this, "Campos não preenchidos", Toast.LENGTH_SHORT).show();
-            if (password != passwordagain) {
-                Toast.makeText(this, "Passwords não são iguais", Toast.LENGTH_SHORT).show();
-            }
-        } else {
+        if(name.isEmpty() || password.isEmpty() || email.isEmpty()){
+            Toast.makeText(this, "Existem campos não preenchidos", Toast.LENGTH_SHORT).show();
+        }
+        else if (password.length() < 8){
+            Toast.makeText(this, "Password tem que ter mais que 8 caracteres", Toast.LENGTH_SHORT).show();
+        }
+        else if(!password.equals(passwordagain)){
+            Toast.makeText(this, "Passwords não são iguais", Toast.LENGTH_SHORT).show();
+        }
+        else{
             result = true;
             Toast.makeText(this, "Registo Feito", Toast.LENGTH_SHORT).show();
         }
