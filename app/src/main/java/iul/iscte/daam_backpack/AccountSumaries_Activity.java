@@ -42,6 +42,9 @@ public class AccountSumaries_Activity extends MenuPage {
 
     private ListAnexoAdapter mAnexoListAdapter;
 
+    private FirebaseUser user;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,8 @@ public class AccountSumaries_Activity extends MenuPage {
 
         listaResumos = new ArrayList<Resumo>();
 
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
         showResumos();
 
@@ -70,7 +75,6 @@ public class AccountSumaries_Activity extends MenuPage {
 
     public void showResumos(){
 
-        //myRef.orderByChild("creator").equalTo(currentUser).addValueEventListener(new ValueEventListener() {
 
         ValueEventListener postListener = new ValueEventListener(){
 
@@ -79,7 +83,7 @@ public class AccountSumaries_Activity extends MenuPage {
 
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Resumo resumo = postSnapshot.getValue(Resumo.class);
-                    if (resumo.getCadeira().equals("TSIO")){
+                    if (resumo.getUserId().equals(user.getUid())){
                         listaResumos.add(resumo);
                     }
                 }

@@ -66,6 +66,9 @@ public class AnexarFicheiro_Activity extends MenuPage{
 
     private boolean fromCamera = false;
 
+    private FirebaseUser user;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,9 @@ public class AnexarFicheiro_Activity extends MenuPage{
         mCadeiraRegisto = (EditText) findViewById(R.id.cadeiraRegisto);
         mUniversidadeRegisto = (EditText) findViewById(R.id.universidadeRegisto);
 
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
         createListen();
         setupDrawer();
 
@@ -93,7 +99,7 @@ public class AnexarFicheiro_Activity extends MenuPage{
         if (nome.isEmpty() || cadeira.isEmpty() || universidade.isEmpty()){
             Toast.makeText(this, "Os campos têm que ser preenchidos!", Toast.LENGTH_SHORT).show();
         }else{
-            Resumo resumo = new Resumo(nome, cadeira, universidade, totalFotos);
+            Resumo resumo = new Resumo(nome, cadeira, universidade, totalFotos, user.getUid());
             myRef.child("Resumos").child(nome).setValue(resumo);
             Toast.makeText(this, "Resumo criado com sucesso!", Toast.LENGTH_SHORT).show();
             finish();

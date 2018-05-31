@@ -158,7 +158,7 @@ public class Settings_Activity extends MenuPage {
     }
 
 
-    /*private void makeAlertDialog() {
+   /* private void makeAlertDialog() {
 
         View promptsView = LayoutInflater.from(this).inflate(R.layout.popup_settings, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
