@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -29,9 +30,6 @@ public class Settings_Activity extends MenuPage {
     private FirebaseDatabase db;
     private DatabaseReference ref;
 
-    private String name, email, university, course;
-    private Utilizador utilizador;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,32 +37,9 @@ public class Settings_Activity extends MenuPage {
         getSupportActionBar().setTitle("Definições");
         createListen();
         setupDrawer();
+
         setupList();
 
-    }
-
-    public void mudarNome(View view) {
-        db = FirebaseDatabase.getInstance();
-        ref = db.getReference();
-        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
-            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Utilizador u = ds.getValue(Utilizador.class);
-                    if (u.getEmail().equals(email)) {
-                        TextView tv = (TextView) findViewById(R.id.changeTV);
-                        tv.append("-" + u.getNome());
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 
     private void setupList() {
@@ -72,7 +47,7 @@ public class Settings_Activity extends MenuPage {
                 "Nome",
                 "Curso",
                 "Universidade",
-                "Password"
+
         };
         //  List<String> settings_list = new ArrayList<String>(Arrays.asList(listItems));
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
@@ -99,9 +74,7 @@ public class Settings_Activity extends MenuPage {
             case "Universidade":
                 result = "university";
                 break;
-            case "Password":
-                result = "password";
-                break;
+
         }
         return result;
     }
@@ -116,7 +89,7 @@ public class Settings_Activity extends MenuPage {
 
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
-        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
+        ref.child("users").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             @Override
@@ -124,10 +97,12 @@ public class Settings_Activity extends MenuPage {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Utilizador u = ds.getValue(Utilizador.class);
 
-                    EditText editTPop = (EditText) promptsView.findViewById(R.id.popET);
-                    final TextView textVPop = (TextView) promptsView.findViewById(R.id.popTV);
+                    final EditText editTPop = (EditText) promptsView.findViewById(R.id.popET);
+
 
                     if (u.getEmail().equals(email)) {
+
+
                         final DataSnapshot tempDS = ds;
 
                         switch (variableToChange) {
@@ -140,21 +115,20 @@ public class Settings_Activity extends MenuPage {
                             case "university":
                                 actualValue[0] = u.getUniversity();
                                 break;
-                            case "password":
-                                actualValue[0] = u.getPassword();
-                                break;
+
                         }
-                        textVPop.append(" " + variableToChange);
+
                         editTPop.append(" " + actualValue[0]);
 
-                        final String tempString = textVPop.getText().toString();
+
                         alertDialogBuilder
                                 .setCancelable(false)
                                 .setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                ref.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(variableToChange).setValue(textVPop.getText().toString());
-
+                                                String response = editTPop.getText().toString();
+                                                String key = email.replace(".", "").replace("@", "");
+                                                ref.child("users").child(key).child(variableToChange).setValue(response);
 
                                             }
                                         }
@@ -168,10 +142,13 @@ public class Settings_Activity extends MenuPage {
                                                         dialog.cancel();
                                                     }
                                                 });
-
                         AlertDialog alertDialog = alertDialogBuilder.create();
+                        if (promptsView.getParent() != null) {
+                            ((ViewGroup) promptsView.getParent()).removeView(promptsView);
+                        }
                         alertDialog.show();
-                        break;
+
+
                     }
                 }
             }
@@ -183,4 +160,31 @@ public class Settings_Activity extends MenuPage {
 
         });
     }
+
+
+    public void mudarNome(View view) {
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference();
+        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Utilizador u = ds.getValue(Utilizador.class);
+                    if (u.getEmail().equals(email)) {
+                        TextView tv = (TextView) findViewById(R.id.changeTV);
+                        tv.append("-" + u.getNome());
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+
 }
