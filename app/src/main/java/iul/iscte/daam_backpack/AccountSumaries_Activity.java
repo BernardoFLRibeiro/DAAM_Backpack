@@ -75,7 +75,6 @@ public class AccountSumaries_Activity extends MenuPage {
 
     public void showResumos(){
 
-        //myRef.orderByChild("creator").equalTo(currentUser).addValueEventListener(new ValueEventListener() {
 
         ValueEventListener postListener = new ValueEventListener(){
 

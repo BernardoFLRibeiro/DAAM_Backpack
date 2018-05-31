@@ -58,12 +58,9 @@ public class Settings_Activity extends MenuPage {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_);
         getSupportActionBar().setTitle("Definições");
-
-        setupList();
-
         createListen();
         setupDrawer();
-
+        setupList();
     }
 
     private void setupList() {
@@ -118,7 +115,7 @@ public class Settings_Activity extends MenuPage {
         String result = "";
         db = FirebaseDatabase.getInstance();
         ref = db.getReference();
-        ref.child("users").addValueEventListener(new ValueEventListener() {
+        ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             @Override
@@ -161,7 +158,7 @@ public class Settings_Activity extends MenuPage {
     }
 
 
-    /*private void makeAlertDialog() {
+   /* private void makeAlertDialog() {
 
         View promptsView = LayoutInflater.from(this).inflate(R.layout.popup_settings, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

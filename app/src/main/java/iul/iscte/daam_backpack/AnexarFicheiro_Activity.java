@@ -69,7 +69,6 @@ public class AnexarFicheiro_Activity extends MenuPage{
     private FirebaseUser user;
     private FirebaseAuth auth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
