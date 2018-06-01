@@ -15,9 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +33,8 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -76,8 +81,6 @@ public class Account_Activity extends MenuPage {
         ref = db.getReference();
 
 
-
-
         ref.child("users").orderByChild("email").addValueEventListener(new ValueEventListener() {
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
 
@@ -86,42 +89,52 @@ public class Account_Activity extends MenuPage {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Utilizador u = ds.getValue(Utilizador.class);
                     if (u.getEmail().equals(email)) {
-                        Log.d("tag email", u.getEmail());
-                        Log.d("tag name", u.getNome());
-                        Log.d("tag university", u.getUniversity());
                         name.setText(u.getNome());
                         email2.setText(u.getEmail());
                         course.setText(u.getCourse());
                         university.setText(u.getUniversity());
-                       //mGaleriaButton.setImageURI();
                     }
 
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
+
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
         String emailUser = email.replace(".", "").replace("@", "");
         String fileName = emailUser + "_0";
-        //mStorageReference.child("ImagemPerfil").child(name.getText().toString()).child(fileName).getFile();
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ImagemPerfil").child(fileName);
 
-//        mStorageReference = FirebaseStorage.getInstance().getReference();
-//        Log.d("fileName", fileName);
-
-        StorageReference filePath = mStorageReference.child("ImagemPerfil").child(fileName);
-
-        mStorageReference.child("ImagemPerfil").child(fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Log.d("uri", "urrrrrrrrrriiiiiiiiii");
-                mGaleriaButton.setImageURI(uri);
+                loadImage(uri);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
             }
         });
+    }
 
+    private void loadImage(Uri uri) {
+        Picasso.get().load(uri)
+                .resize(mGaleriaButton.getWidth(), mGaleriaButton.getHeight())
+                .into(mGaleriaButton, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                    }
+                });
     }
 
     private Bitmap getImageBitmap(String url) {
@@ -145,8 +158,8 @@ public class Account_Activity extends MenuPage {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK) {
-            switch (requestCode){
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
                 case GALLERY_INTENT:
                     getOneGalleryData(data);
                     break;
@@ -155,7 +168,7 @@ public class Account_Activity extends MenuPage {
     }
 
     //método para anexar imagens da galeria
-    public void galeriaImagemAccount(View view){
+    public void changeImage(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -163,8 +176,7 @@ public class Account_Activity extends MenuPage {
     }
 
     //obter uma imagem da galeria
-
-    public void getOneGalleryData(Intent data){
+    public void getOneGalleryData(Intent data) {
         //totalFotos = 1;
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
         String emailUser = email.replace(".", "").replace("@", "");
@@ -179,7 +191,7 @@ public class Account_Activity extends MenuPage {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(Account_Activity.this, "Carregamento com sucesso!", Toast.LENGTH_LONG).show();
                 mProgressDialog.dismiss();
-                mGaleriaButton.setImageURI(uri);
+               loadImage(uri);
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -191,9 +203,6 @@ public class Account_Activity extends MenuPage {
         });
 
     }
-
-
-
 
 
 }
