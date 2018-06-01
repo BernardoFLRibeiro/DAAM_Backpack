@@ -76,7 +76,6 @@ public class AnexarFicheiro_Activity extends MenuPage{
         setContentView(R.layout.activity_anexar_ficheiro);
         mProgressDialog = new ProgressDialog(this);
 
-        mCapturaButton = (ImageButton) findViewById(R.id.cameraButton);
         mGaleriaButton = (ImageButton) findViewById(R.id.galleryButton);
 
         mNomeRegisto = (EditText) findViewById(R.id.nomeRegisto);

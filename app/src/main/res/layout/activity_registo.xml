@@ -16,7 +16,7 @@
         android:scaleType="fitCenter" />
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp"
@@ -24,101 +24,135 @@
         android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/login_white_box"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_nome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nome"
-                tools:layout_editor_absoluteX="162dp"
-                tools:layout_editor_absoluteY="245dp" />
 
             <EditText
                 android:id="@+id/et_nome"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableLeft="@drawable/person"
+                android:drawablePadding="5dp"
                 android:ems="10"
-                android:inputType="none|textPersonName" />
-
-            <TextView
-                android:id="@+id/tv_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Password" />
+                android:hint="Nome"
+                android:inputType="none|textPersonName"
+                android:paddingStart="10dp" />
 
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableLeft="@drawable/lock"
+                android:drawablePadding="5dp"
                 android:ems="10"
-                android:inputType="textPassword" />
-
-            <TextView
-                android:id="@+id/tv_retype"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ReType Password" />
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="10dp" />
 
             <EditText
                 android:id="@+id/et_retype_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableLeft="@drawable/lock"
+                android:drawablePadding="5dp"
                 android:ems="10"
-                android:inputType="textPassword" />
-
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email" />
+                android:hint="Confirma password"
+                android:inputType="textPassword"
+                android:paddingStart="10dp" />
 
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="5dp"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <TextView
-                android:id="@+id/tv_course"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Course" />
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="10dp" />
 
             <EditText
                 android:id="@+id/et_course"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableLeft="@drawable/graduation"
+                android:drawablePadding="5dp"
                 android:ems="10"
-                android:inputType="none|textPersonName" />
-
-            <TextView
-                android:id="@+id/tv_university"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="University" />
+                android:hint="Curso"
+                android:inputType="none|textPersonName"
+                android:paddingStart="10dp" />
 
             <EditText
                 android:id="@+id/et_university"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableLeft="@drawable/school"
+                android:drawablePadding="5dp"
                 android:ems="10"
-                android:inputType="none|textPersonName" />
+                android:hint="Universidade"
+                android:inputType="none|textPersonName"
+                android:paddingStart="10dp" />
 
             <Button
                 android:id="@+id/btn_registo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Registo" />
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/login_button"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Registo"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tvRegisto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registo"
+        android:textColor="#000"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="25dp" />
 
 </android.support.constraint.ConstraintLayout>

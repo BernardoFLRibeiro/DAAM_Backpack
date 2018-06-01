@@ -52,7 +52,8 @@
         <activity android:name=".HomePage"
             android:screenOrientation="portrait"/>
         <activity android:name=".Registo"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Perfil"
             android:screenOrientation="portrait"/>
         <activity android:name=".Search_Activity"

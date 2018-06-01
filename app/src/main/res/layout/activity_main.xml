@@ -68,11 +68,11 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/rounded_edit_text"
+                    android:paddingStart="10dp"
                     android:drawableLeft="@drawable/person"
                     android:drawablePadding="5dp"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="10dp"
                     tools:text="Email" />
 
                 <EditText

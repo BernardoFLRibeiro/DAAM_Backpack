@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,76 +25,82 @@
             android:id="@+id/recentesTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_above="@+id/recentList"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="-71dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/recycler_white_box"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="Mais Recentes"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.017" />
+            android:textColor="#000"
+            android:textSize="30sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recentList"
-            android:layout_width="368dp"
-            android:layout_height="106dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recentesTV" />
+            android:layout_width="match_parent"
+            android:layout_height="169dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="71dp"
+            android:background="@drawable/recycler_white_box"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:scrollbars="vertical" />
 
         <TextView
             android:id="@+id/popularesTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="208dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/recycler_white_box"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="Mais Populares"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recentList"
-            app:layout_constraintVertical_bias="0.171" />
+            android:textColor="#000"
+            android:textSize="30sp"/>
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/popularList"
-            android:layout_width="368dp"
-            android:layout_height="106dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularesTV"
-            app:layout_constraintVertical_bias="0.111" />
 
         <ImageButton
             android:id="@+id/startSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/recentesTV"
+            android:layout_marginEnd="32dp"
+            android:background="@null"
             android:onClick="goToSearch"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sync_black_24dp" />
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/search" />
 
-    </android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/popularList"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/popularesTV"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="-208dp"
+            android:background="@drawable/recycler_white_box"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="10dp"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="300dp" />
+
+    </RelativeLayout>
 
 
     <android.support.design.widget.NavigationView

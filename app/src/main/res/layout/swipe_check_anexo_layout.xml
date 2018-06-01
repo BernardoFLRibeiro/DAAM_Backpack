@@ -10,7 +10,11 @@ android:layout_height="fill_parent">
         android:adjustViewBounds="true"
         android:layout_gravity="center"
         android:src="@drawable/check_more"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"/>
 
     <TextView
         android:id="@+id/swipeText"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -24,19 +24,24 @@
             android:id="@+id/changeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_above="@+id/lv_view"
+            android:layout_alignStart="@+id/lv_view"
+            android:layout_marginBottom="-72dp"
             android:text="Alterar"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/rounded_white_box"
+            android:textColor="#000"
             android:textSize="30sp"
+            android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/lv_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.028"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
+            app:layout_constraintVertical_bias="1.0" />
 
 
         <ListView
@@ -47,11 +52,17 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="72dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/rounded_white_box"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.178" />
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nv_view"

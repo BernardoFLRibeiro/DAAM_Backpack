@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,31 +22,36 @@
             android:background="@drawable/login_background"
             android:scaleType="fitCenter" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="72dp"
-            android:layout_height="62dp"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:onClick="createNewResumo"
-            android:src="@drawable/icon_plus"
-            app:backgroundTint="@android:color/holo_orange_dark"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/meus_ficheiros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/listResumos"
+            android:layout_alignStart="@+id/listResumos"
+            android:background="@drawable/rounded_white_box"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Os Meus Ficheiros"
+            android:textColor="#000"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listResumos"
-            android:layout_width="368dp"
-            android:layout_height="403dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="350dp"
+            android:layout_height="431dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/recycler_white_box"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="10dp"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +60,23 @@
             app:layout_constraintVertical_bias="1.0" />
 
 
-    </android.support.constraint.ConstraintLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="55dp"
+            android:layout_height="58dp"
+            android:layout_alignBottom="@+id/listResumos"
+            android:layout_alignEnd="@+id/listResumos"
+            android:layout_gravity="end|bottom"
+            android:onClick="createNewResumo"
+            android:src="@drawable/icon_plus"
+            app:backgroundTint="@color/colorStatus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </RelativeLayout>
 
 
     <android.support.design.widget.NavigationView
