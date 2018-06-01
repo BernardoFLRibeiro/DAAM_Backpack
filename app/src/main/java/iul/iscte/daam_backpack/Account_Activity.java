@@ -135,6 +135,7 @@ public class Account_Activity extends MenuPage {
                     public void onError(Exception e) {
                     }
                 });
+        loadImageNav(uri);
     }
 
     private Bitmap getImageBitmap(String url) {

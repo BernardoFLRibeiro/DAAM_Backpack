@@ -2,6 +2,7 @@ package iul.iscte.daam_backpack;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -9,10 +10,19 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
@@ -31,18 +41,60 @@ public class MenuPage extends AppCompatActivity {
 
     }
 
-
     public void createListen() {
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
-
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         dl.addDrawerListener(t);
         nv = (NavigationView) findViewById(R.id.nv_view);
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        View listHeaderView = inflater.inflate(R.layout.header_layout, null, false);
+
+        final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
+        String emailUser = email.replace(".", "").replace("@", "");
+        String fileName = emailUser + "_0";
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ImagemPerfil").child(fileName);
+
+
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                ImageView imageView = (ImageView) findViewById(R.id.nv_image);
+                final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                TextView tvemail = (TextView) findViewById(R.id.header_email);
+                if (tvemail != null) {
+                    tvemail.setText(email);
+                }
+                if (imageView != null) {
+                    Picasso.get().load(uri)
+                            .resize(imageView.getWidth(), imageView.getHeight())
+                            .into(imageView, new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                }
+                            });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
+            }
+        });
+
+        nv.addHeaderView(listHeaderView);
+
+
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -79,6 +131,23 @@ public class MenuPage extends AppCompatActivity {
         });
 
     }
+public void loadImageNav(Uri uri){
+
+    ImageView imageView = (ImageView) findViewById(R.id.nv_image);
+    if (imageView != null) {
+        Picasso.get().load(uri)
+                .resize(imageView.getWidth(), imageView.getHeight())
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                    }
+                });
+    }
+}
 
     public void selectItem() {
 
@@ -96,7 +165,7 @@ public class MenuPage extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), AccountGroups_Activity.class));
                 break;
             case 4:
-                  startActivity(new Intent(getApplicationContext(), Settings_Activity.class));
+                startActivity(new Intent(getApplicationContext(), Settings_Activity.class));
                 break;
             case 5:
                 FirebaseAuth.getInstance().signOut();
@@ -109,6 +178,7 @@ public class MenuPage extends AppCompatActivity {
 
 
     public void setupDrawer() {
+
         t = new ActionBarDrawerToggle(this, dl, R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerOpened(View drawerView) {

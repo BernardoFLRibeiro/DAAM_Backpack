@@ -7,27 +7,22 @@
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
 
-       <TextView
-           android:id="@+id/textView"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_weight="1"
-           android:text="MainLayout"
-           android:textSize="24sp" />
-   </LinearLayout>
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
+
         android:id="@+id/nv_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu"
-        android:color="#ffc000">
+        android:color="#ffc000"
+        app:headerLayout="@layout/header_layout"
+        app:menu="@menu/nav_menu">
 
     </android.support.design.widget.NavigationView>
 

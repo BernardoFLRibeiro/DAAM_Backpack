@@ -12,7 +12,6 @@ public class HomePage extends MenuPage {
         getSupportActionBar().setTitle("Pagina Principal");
         createListen();
         setupDrawer();
-
     }
 
 
