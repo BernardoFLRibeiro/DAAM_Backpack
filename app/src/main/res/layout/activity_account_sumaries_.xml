@@ -8,7 +8,7 @@
     android:scrollbars="none">
 
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,28 +24,38 @@
 
         <TextView
             android:id="@+id/meus_ficheiros"
-            android:layout_width="wrap_content"
+            android:layout_width="157dp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/listResumos"
             android:layout_alignStart="@+id/listResumos"
-            android:background="@drawable/rounded_white_box"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/recycler_white_box"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:paddingTop="5dp"
             android:text="Os Meus Ficheiros"
             android:textColor="#000"
-            android:textSize="30sp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listResumos"
-            android:layout_width="350dp"
-            android:layout_height="431dp"
+            android:layout_width="348dp"
+            android:layout_height="486dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="104dp"
             android:layout_marginEnd="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/recycler_white_box"
             android:paddingBottom="10dp"
             android:paddingLeft="5dp"
@@ -54,10 +64,10 @@
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.688"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/meus_ficheiros"
+            app:layout_constraintVertical_bias="0.0" />
 
 
         <android.support.design.widget.FloatingActionButton
@@ -67,16 +77,17 @@
             android:layout_alignBottom="@+id/listResumos"
             android:layout_alignEnd="@+id/listResumos"
             android:layout_gravity="end|bottom"
+            android:layout_marginBottom="28dp"
             android:onClick="createNewResumo"
             android:src="@drawable/icon_plus"
             app:backgroundTint="@color/colorStatus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.955"
             app:layout_constraintStart_toStartOf="parent" />
 
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
     <android.support.design.widget.NavigationView

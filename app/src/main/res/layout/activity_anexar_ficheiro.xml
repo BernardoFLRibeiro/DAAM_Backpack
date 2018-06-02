@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,28 +15,32 @@
         <ImageView
             android:id="@+id/backlogin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="718dp"
             android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_alignParentTop="true"
             android:background="@drawable/login_background"
             android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/anexarRegisto"
-            android:layout_width="130dp"
-            android:layout_height="31dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/nomeRegisto"
-            android:layout_marginBottom="188dp"
+            android:layout_marginBottom="316dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
             android:text="Anexar fotos:"
             android:textColor="#000000"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.033"
+            app:layout_constraintHorizontal_bias="0.048"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.655" />
+            app:layout_constraintTop_toBottomOf="@+id/universidadeRegisto"
+            app:layout_constraintVertical_bias="0.533" />
 
         <TextView
             android:id="@+id/novoRegisto"
@@ -44,6 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="34dp"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
@@ -56,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.017" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/nomeRegisto"
@@ -64,17 +70,19 @@
             android:layout_height="40dp"
             android:layout_below="@+id/nomeLabel"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/recycler_white_box"
             android:ems="10"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.228"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.171" />
+            app:layout_constraintTop_toBottomOf="@+id/nomeLabel"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/nomeLabel"
@@ -82,16 +90,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/anexarRegisto"
-            android:layout_marginTop="78dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
             android:text="Nome:"
             android:textColor="#000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.004" />
+            app:layout_constraintTop_toBottomOf="@+id/novoRegisto"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/cadeiraRegisto"
@@ -99,33 +109,39 @@
             android:layout_height="40dp"
             android:layout_below="@+id/cadeiraLabel"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/recycler_white_box"
             android:ems="10"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.349" />
+            app:layout_constraintTop_toBottomOf="@+id/cadeiraLabel"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/cadeiraLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="138dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/universidadeRegisto"
             android:layout_below="@+id/nomeRegisto"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
             android:text="Unidade curricular:"
             android:textColor="#000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.031"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.289" />
+            app:layout_constraintTop_toBottomOf="@+id/nomeRegisto"
+            app:layout_constraintVertical_bias="0.005" />
 
         <EditText
             android:id="@+id/universidadeRegisto"
@@ -133,17 +149,17 @@
             android:layout_height="40dp"
             android:layout_below="@+id/universidadeLabel"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/recycler_white_box"
             android:ems="10"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.266"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.591" />
+            app:layout_constraintTop_toBottomOf="@+id/universidadeLabel" />
 
         <TextView
             android:id="@+id/universidadeLabel"
@@ -151,31 +167,36 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/anexarRegisto"
             android:layout_below="@+id/cadeiraRegisto"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
             android:text="Universidade:"
             android:textColor="#000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.031"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.462" />
+            app:layout_constraintTop_toBottomOf="@+id/cadeiraRegisto"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/galleryButton"
-            android:layout_width="55dp"
-            android:layout_height="36dp"
+            android:layout_width="70dp"
+            android:layout_height="47dp"
             android:layout_alignBottom="@+id/anexarRegisto"
             android:layout_alignStart="@+id/novoRegisto"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@null"
             android:onClick="galeriaImagem"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.456"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.658"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/anexarRegisto"
+            app:layout_constraintTop_toBottomOf="@+id/universidadeRegisto"
+            app:layout_constraintVertical_bias="0.03"
             app:srcCompat="@drawable/icon_gallery" />
 
         <android.support.design.widget.FloatingActionButton
@@ -191,16 +212,18 @@
             app:backgroundTint="@color/colorStatus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.973"
+            app:layout_constraintHorizontal_bias="0.996"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.981"
+            app:layout_constraintVertical_bias="0.974"
             app:srcCompat="@drawable/icon_save" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listImages"
-            android:layout_width="wrap_content"
-            android:layout_height="137dp"
+            android:layout_width="347dp"
+            android:layout_height="165dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/anexarRegisto"
             android:layout_marginBottom="31dp"
@@ -210,11 +233,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/galleryButton"
-            app:layout_constraintVertical_bias="0.227">
+            app:layout_constraintVertical_bias="0.283">
 
         </android.support.v7.widget.RecyclerView>
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
     <android.support.design.widget.NavigationView

@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,43 +26,43 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/lv_view"
             android:layout_alignStart="@+id/lv_view"
-            android:layout_marginBottom="-72dp"
-            android:text="Alterar"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="92dp"
+            android:background="@drawable/recycler_white_box"
+            android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:background="@drawable/rounded_white_box"
+            android:text="Alterar"
             android:textColor="#000"
-            android:textSize="30sp"
+            android:textSize="16sp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/lv_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ListView
             android:id="@+id/lv_view"
-            android:layout_width="match_parent"
-            android:layout_height="403dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="370dp"
+            android:layout_height="273dp"
+            android:layout_marginBottom="300dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="72dp"
-            android:paddingLeft="20dp"
-            android:background="@drawable/rounded_white_box"
-            android:paddingRight="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/recycler_white_box"
             android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.178" />
-    </RelativeLayout>
+            app:layout_constraintTop_toBottomOf="@+id/changeTV"
+            app:layout_constraintVertical_bias="0.727" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nv_view"
