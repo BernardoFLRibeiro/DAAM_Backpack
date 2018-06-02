@@ -5,5 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="colorStatus">#ffc000</color>
+    <color name="colorStatus">#ffcb30</color>
+    <color name="barraCima">#ffe266</color>
+    <color name="teste">#cacaca</color>
 </resources>

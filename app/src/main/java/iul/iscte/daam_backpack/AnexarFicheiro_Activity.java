@@ -173,8 +173,6 @@ public class AnexarFicheiro_Activity extends MenuPage{
     public void getOneGalleryData(Intent data){
         prepareGallery();
 
-        mCapturaButton.setEnabled(false);
-
         totalFotos = 1;
 
         String fileName = mNomeRegisto.getText().toString() + "_0";
@@ -209,8 +207,6 @@ public class AnexarFicheiro_Activity extends MenuPage{
     public void prepareGallery(){
         mProgressDialog.setMessage("A carregar...");
         mProgressDialog.show();
-
-        mCapturaButton.setEnabled(false);
 
         layoutManager = new LinearLayoutManager(this);
 
