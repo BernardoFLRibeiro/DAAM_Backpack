@@ -165,6 +165,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
+                android:background="@drawable/image_flipper"
                 android:layout_marginBottom="0dp"
                 android:paddingBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
