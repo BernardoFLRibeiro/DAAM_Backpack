@@ -19,6 +19,11 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Callback;
@@ -66,9 +71,31 @@ public class MenuPage extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 ImageView imageView = (ImageView) findViewById(R.id.nv_image);
-                final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-                TextView tvemail = (TextView) findViewById(R.id.header_email);
+
+                final TextView tvemail = (TextView) findViewById(R.id.header_email);
                 if (tvemail != null) {
+                    FirebaseDatabase db = FirebaseDatabase.getInstance();
+                    DatabaseReference ref = db.getReference();
+                    ref.child("users").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                Utilizador u = ds.getValue(Utilizador.class);
+
+                                String nome = u.getNome();
+                                tvemail.setText(nome);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+
+                    });
+
                     tvemail.setText(email);
                 }
                 if (imageView != null) {
@@ -131,23 +158,24 @@ public class MenuPage extends AppCompatActivity {
         });
 
     }
-public void loadImageNav(Uri uri){
 
-    ImageView imageView = (ImageView) findViewById(R.id.nv_image);
-    if (imageView != null) {
-        Picasso.get().load(uri)
-                .resize(imageView.getWidth(), imageView.getHeight())
-                .into(imageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                    }
+    public void loadImageNav(Uri uri) {
 
-                    @Override
-                    public void onError(Exception e) {
-                    }
-                });
+        ImageView imageView = (ImageView) findViewById(R.id.nv_image);
+        if (imageView != null) {
+            Picasso.get().load(uri)
+                    .resize(imageView.getWidth(), imageView.getHeight())
+                    .into(imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                        }
+                    });
+        }
     }
-}
 
     public void selectItem() {
 
