@@ -47,7 +47,6 @@ public class HomePage extends MenuPage {
 
         createListen();
         setupDrawer();
-
     }
 
     public void prepareRecyclerViews(){
