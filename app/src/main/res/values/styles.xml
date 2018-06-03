@@ -12,9 +12,19 @@
         <item name="windowActionBar">false</item>
         <item name="colorPrimaryDark">@color/colorStatus</item>
         <item name="windowNoTitle">true</item>
+
     </style>
-    <style name="myDialog" parent="Theme.AppCompat.Dialog">
+
+    <style name="AppTheme.AlertDialog">
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimaryDark">@color/colorStatus</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="myDialog" parent="AppTheme.AlertDialog">
         <item name="android:windowNoTitle">true</item>
+
 
     </style>
 

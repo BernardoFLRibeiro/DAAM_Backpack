@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,8 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 public class Settings_Activity extends MenuPage {
     private String[] listItems;
 
-       private FirebaseDatabase db;
+    private FirebaseDatabase db;
     private DatabaseReference ref;
+    private AlertDialog alertDialog;
+    private View promptsView;
+    private String variableToChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,33 +60,33 @@ public class Settings_Activity extends MenuPage {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
-                getData(setVariableToChange(selectedItem));
+                setVariableToChange(selectedItem);
+                getData();
             }
         });
     }
 
-    private String setVariableToChange(String info) {
-        String result = "";
+    private void setVariableToChange(String info) {
         switch (info) {
             case "Nome":
-                result = "nome";
+                variableToChange = "nome";
                 break;
             case "Curso":
-                result = "course";
+                variableToChange = "course";
                 break;
             case "Universidade":
-                result = "university";
+                variableToChange = "university";
                 break;
 
         }
-        return result;
+
     }
 
-    private void getData(final String variableToChange) {
+    private void getData( ) {
         final Context c = Settings_Activity.this;
         final String[] actualValue = {""};
 
-        final View promptsView = LayoutInflater.from(c).inflate(R.layout.popup_settings, null);
+        promptsView= LayoutInflater.from(c).inflate(R.layout.popup_settings, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(c, R.style.myDialog));
         alertDialogBuilder.setView(promptsView);
 
@@ -116,18 +120,19 @@ public class Settings_Activity extends MenuPage {
                                 break;
 
                         }
+                       alertDialog = alertDialogBuilder.create();
+                        editTPop.append("" + actualValue[0]);
 
-                        editTPop.append(" " + actualValue[0]);
 
 
-                        alertDialogBuilder
+
+
+                    /*    alertDialogBuilder
                                 .setCancelable(false)
                                 .setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                                String response = editTPop.getText().toString();
-                                                String key = email.replace(".", "").replace("@", "");
-                                                ref.child("users").child(key).child(variableToChange).setValue(response);
+
 
                                             }
                                         }
@@ -141,7 +146,7 @@ public class Settings_Activity extends MenuPage {
                                                         dialog.cancel();
                                                     }
                                                 });
-                        AlertDialog alertDialog = alertDialogBuilder.create();
+*/
                         if (promptsView.getParent() != null) {
                             ((ViewGroup) promptsView.getParent()).removeView(promptsView);
                         }
@@ -152,12 +157,31 @@ public class Settings_Activity extends MenuPage {
                 }
             }
 
+
+
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
 
         });
+    }
+
+    public void OnclickOK(View view){
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        EditText editTPop = (EditText) promptsView.findViewById(R.id.popET);
+        String response = editTPop.getText().toString();
+        String key = email.replace(".", "").replace("@", "");
+        ref.child("users").child(key).child(variableToChange).setValue(response);
+        alertDialog.cancel();
+
+    }
+
+    public void OnclickCancelar(View view){
+
+        alertDialog.cancel();
+
     }
 
 
