@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,6 +64,9 @@ public class Registo extends AppCompatActivity {
                                 Toast.makeText(Registo.this, "Sucesso", Toast.LENGTH_LONG);
                                 startActivity(new Intent(Registo.this, HomePage.class));
                             } else {
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                    Toast.makeText(Registo.this, "Email ja existe. Por favor escolha um diferente", Toast.LENGTH_SHORT).show();
+                                }
                                 Toast.makeText(Registo.this, "Falhou", Toast.LENGTH_LONG);
                             }
                         }
@@ -103,7 +107,7 @@ public class Registo extends AppCompatActivity {
             Toast.makeText(this, "Passwords não são iguais", Toast.LENGTH_SHORT).show();
         } else {
             result = true;
-            Toast.makeText(this, "Registo Feito", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Registo Feito", Toast.LENGTH_SHORT).show();
         }
         return result;
     }
