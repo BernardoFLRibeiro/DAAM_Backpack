@@ -80,7 +80,7 @@ public class AccountSumaries_Activity extends MenuPage {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                listaResumos = new ArrayList<Resumo>();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Resumo resumo = postSnapshot.getValue(Resumo.class);
                     if (resumo.getUserId().equals(user.getUid())){

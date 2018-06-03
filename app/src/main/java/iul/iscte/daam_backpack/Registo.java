@@ -140,8 +140,9 @@ public class Registo extends AppCompatActivity {
                 String appTitle = dataSnapshot.getValue(String.class);
 
                 // update toolbar title
-                getSupportActionBar().setTitle(appTitle);
-
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(appTitle);
+                }
                 createUser(user_name, user_email, user_password, user_course, user_university);
             }
 

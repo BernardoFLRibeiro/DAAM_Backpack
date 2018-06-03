@@ -23,7 +23,7 @@
         android:layout_marginStart="26dp"
         android:text="Nome registo"
         android:textColor="#000"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
