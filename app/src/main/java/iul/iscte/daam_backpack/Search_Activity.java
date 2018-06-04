@@ -1,5 +1,6 @@
 package iul.iscte.daam_backpack;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Search_Activity extends MenuPage {
 
@@ -62,7 +64,7 @@ public class Search_Activity extends MenuPage {
         setupDrawer();
     }
 
-    public void fillAnexosListFiltered(View view){
+    public void fillAnexosListFiltered(View view) {
         String filterChoice = checkRadioGroup();
 
         String filter = searchText.getText().toString();
@@ -79,7 +81,7 @@ public class Search_Activity extends MenuPage {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     listaResumos = new ArrayList<Resumo>();
-                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Resumo resumo = postSnapshot.getValue(Resumo.class);
                         listaResumos.add(resumo);
                     }
@@ -97,13 +99,13 @@ public class Search_Activity extends MenuPage {
         }
     }
 
-    public void fillAnexosList(){
-        ValueEventListener postListener = new ValueEventListener(){
+    public void fillAnexosList() {
+        ValueEventListener postListener = new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Resumo resumo = postSnapshot.getValue(Resumo.class);
                     listaResumos.add(resumo);
                 }
@@ -114,14 +116,14 @@ public class Search_Activity extends MenuPage {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Search_Activity.this,"Ocorreu um erro!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Search_Activity.this, "Ocorreu um erro!", Toast.LENGTH_SHORT).show();
             }
         };
 
         myRef.addValueEventListener(postListener);
     }
 
-    public String checkRadioGroup(){
+    public String checkRadioGroup() {
         int selectedRadio = radioGroup.getCheckedRadioButtonId();
 
         String selectedOption = "nome";
@@ -142,6 +144,9 @@ public class Search_Activity extends MenuPage {
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), HomePage.class));
+    }
 
 }
