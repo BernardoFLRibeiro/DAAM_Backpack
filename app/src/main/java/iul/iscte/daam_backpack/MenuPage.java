@@ -37,68 +37,47 @@ public class MenuPage extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-    private int position = -1;
+    private String userEmail;
+    private TextView tvnome;
+    private String nome;
+    private View listHeaderView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_page);
-
     }
 
     public void createListen() {
         ActionBar actionBar = getSupportActionBar();
+
+        dl = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dl.addDrawerListener(t);
+        nv = (NavigationView) findViewById(R.id.nv_view);
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
-        dl = (DrawerLayout) findViewById(R.id.drawer_layout);
-        dl.addDrawerListener(t);
-        nv = (NavigationView) findViewById(R.id.nv_view);
 
         LayoutInflater inflater = getLayoutInflater();
 
-        View listHeaderView = inflater.inflate(R.layout.header_layout, null, false);
+        listHeaderView = inflater.inflate(R.layout.header_layout, null, false);
 
-        final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+        userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
 
-        String emailUser = email.replace(".", "").replace("@", "");
+        String emailUser = userEmail.replace(".", "").replace("@", "");
         String fileName = emailUser + "_0";
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ImagemPerfil").child(fileName);
-
+        loadName();
 
         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                boolean i = true;
+
                 ImageView imageView = (ImageView) findViewById(R.id.nv_image);
 
-                final TextView tvemail = (TextView) findViewById(R.id.header_email);
-                if (tvemail != null) {
-                    FirebaseDatabase db = FirebaseDatabase.getInstance();
-                    DatabaseReference ref = db.getReference();
-                    ref.child("users").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
-                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                                Utilizador u = ds.getValue(Utilizador.class);
-
-                                String nome = u.getNome();
-                                tvemail.setText(nome);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-
-                    });
-
-                    tvemail.setText(email);
-                }
                 if (imageView != null) {
+
                     Picasso.get().load(uri)
                             .resize(imageView.getWidth(), imageView.getHeight())
                             .into(imageView, new Callback() {
@@ -121,6 +100,7 @@ public class MenuPage extends AppCompatActivity {
 
         nv.addHeaderView(listHeaderView);
 
+//Define para que atividade
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -128,35 +108,69 @@ public class MenuPage extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.nav_home:
-                        position = 0;
+                        startActivity(new Intent(getApplicationContext(), HomePage.class));
+                        finish();
                         break;
                     case R.id.nav_account:
-                        position = 1;
+                        startActivity(new Intent(getApplicationContext(), Account_Activity.class));
+                        finish();
                         break;
 
                     case R.id.nav_accountSummaries:
-                        position = 2;
+                        startActivity(new Intent(getApplicationContext(), AccountSumaries_Activity.class));
+                        finish();
                         break;
 
                     case R.id.nav_accountGroups:
-                        position = 3;
+                        startActivity(new Intent(getApplicationContext(), AccountGroups_Activity.class));
+                        finish();
                         break;
 
                     case R.id.nav_settings:
-                        position = 4;
+                        startActivity(new Intent(getApplicationContext(), Settings_Activity.class));
+                        finish();
                         break;
 
                     case R.id.nav_logout:
-                        position = 5;
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
                         break;
-                }
-                if (!(position == -1)) {
-                    selectItem();
                 }
                 return false;
             }
         });
 
+    }
+
+    public void loadName() {
+
+        tvnome = (TextView) listHeaderView.findViewById(R.id.header_nome);
+
+        if (tvnome != null) {
+
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+            ref.child("users").orderByChild("email").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        Utilizador u = ds.getValue(Utilizador.class);
+                        if (u.getEmail().equals(userEmail)) {
+                            String nome = u.getNome();
+                            tvnome.setText(nome);
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+            });
+        }
     }
 
     public void loadImageNav(Uri uri) {
@@ -177,34 +191,6 @@ public class MenuPage extends AppCompatActivity {
         }
     }
 
-    public void selectItem() {
-
-        switch (position) {
-            case 0:
-                startActivity(new Intent(getApplicationContext(), HomePage.class));
-                break;
-            case 1:
-                startActivity(new Intent(getApplicationContext(), Account_Activity.class));
-                break;
-            case 2:
-                startActivity(new Intent(getApplicationContext(), AccountSumaries_Activity.class));
-                break;
-            case 3:
-                startActivity(new Intent(getApplicationContext(), AccountGroups_Activity.class));
-                break;
-            case 4:
-                startActivity(new Intent(getApplicationContext(), Settings_Activity.class));
-                break;
-            case 5:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-                break;
-
-        }
-    }
-
-
     public void setupDrawer() {
 
         t = new ActionBarDrawerToggle(this, dl, R.string.drawer_open, R.string.drawer_close) {
@@ -221,7 +207,6 @@ public class MenuPage extends AppCompatActivity {
             }
         };
         t.setDrawerIndicatorEnabled(true);
-        //dl.setDrawerListener(t);
     }
 
     @Override

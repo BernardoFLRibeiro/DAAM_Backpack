@@ -82,11 +82,11 @@ public class Settings_Activity extends MenuPage {
 
     }
 
-    private void getData( ) {
+    private void getData() {
         final Context c = Settings_Activity.this;
         final String[] actualValue = {""};
 
-        promptsView= LayoutInflater.from(c).inflate(R.layout.popup_settings, null);
+        promptsView = LayoutInflater.from(c).inflate(R.layout.popup_settings, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(c, R.style.myDialog));
         alertDialogBuilder.setView(promptsView);
 
@@ -120,7 +120,7 @@ public class Settings_Activity extends MenuPage {
                                 break;
 
                         }
-                       alertDialog = alertDialogBuilder.create();
+                        alertDialog = alertDialogBuilder.create();
                         editTPop.append("" + actualValue[0]);
 
 
@@ -158,8 +158,6 @@ public class Settings_Activity extends MenuPage {
             }
 
 
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -168,17 +166,18 @@ public class Settings_Activity extends MenuPage {
         });
     }
 
-    public void OnclickOK(View view){
+    public void OnclickOK(View view) {
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         EditText editTPop = (EditText) promptsView.findViewById(R.id.popET);
         String response = editTPop.getText().toString();
         String key = email.replace(".", "").replace("@", "");
         ref.child("users").child(key).child(variableToChange).setValue(response);
         alertDialog.cancel();
+        loadName();
 
     }
 
-    public void OnclickCancelar(View view){
+    public void OnclickCancelar(View view) {
 
         alertDialog.cancel();
 
