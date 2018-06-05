@@ -17,6 +17,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomePage extends MenuPage {
 
@@ -76,7 +77,7 @@ public class HomePage extends MenuPage {
                     Resumo resumo = postSnapshot.getValue(Resumo.class);
                     mListRecentAnexos.add(resumo);
                 }
-
+                Collections.reverse(mListRecentAnexos);
                 mRecentListAdapter = new ListAnexoAdapter(mListRecentAnexos);
                 recyclerViewRecent.setAdapter(mRecentListAdapter);
 
@@ -100,7 +101,7 @@ public class HomePage extends MenuPage {
                     Resumo resumo = postSnapshot.getValue(Resumo.class);
                     mListPopularAnexos.add(resumo);
                 }
-
+                Collections.reverse(mListPopularAnexos);
                 mPopularListAdapter = new ListAnexoAdapter(mListPopularAnexos);
                 recyclerViewPopular.setAdapter(mPopularListAdapter);
 
