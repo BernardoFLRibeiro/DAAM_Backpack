@@ -52,46 +52,4 @@ public class DB extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor getData(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from user where id="+id+"", null );
-        return res;
-    }
-
-    public int numberOfRows(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, USER_TABLE_NAME);
-        return numRows;
-    }
-
-    public boolean updateUser (Integer id, String name, String university, String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("email", email);
-        contentValues.put("university", university);
-        db.update("user", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
-        return true;
-    }
-
-    public Integer deleteUsesr (Integer id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("user",
-                "id = ? ",
-                new String[] { Integer.toString(id) });
-    }
-
-    public ArrayList<String> getAllUser() {
-        ArrayList<String> array_list = new ArrayList<String>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from contacts", null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(USER_COLUMN_NAME)));
-            res.moveToNext();
-        }
-        return array_list;
-    }
 }

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         userRegistration = findViewById(R.id.newUser);
         login = findViewById(R.id.login_bt);
 
-        // funciona mas preciso de testar o login
+
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         if (user != null) {
