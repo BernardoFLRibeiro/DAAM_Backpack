@@ -55,7 +55,6 @@ public class CheckAnexo_Activity extends MenuPage {
 
     private ArrayList<String> images = new ArrayList<String>();
     private ViewPager mPager;
-    private SwipeCheckAnexoAdapter adapter;
 
     private FirebaseStorage storage;
     private StorageReference storageRef;

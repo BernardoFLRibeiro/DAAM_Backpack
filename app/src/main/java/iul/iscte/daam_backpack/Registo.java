@@ -109,16 +109,6 @@ public class Registo extends AppCompatActivity {
         return result;
     }
 
-//    private void sendUserData(){
-//        String name = username.getText().toString();
-//        String email = useremail.getText().toString();
-//        String university = useruniversity.getText().toString();
-//
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = firebaseDatabase.getReference();
-//        Utilizador userProfile = new Utilizador(name, email, university);
-//        myRef.child("user").setValue(userProfile);
-//    }
 
     private void saveToDatabse() {
         mFirebaseInstance = FirebaseDatabase.getInstance();

@@ -61,10 +61,8 @@ public class SwipeCheckAnexoAdapter extends PagerAdapter {
         imagesRef = storageRef.child("FicheirosAnexados").child(NomeRegisto);
 
         StorageReference imageReference = imagesRef.child(images.get(position));
-        String url = imageReference.getPath();
 
         GlideApp.with(view).load(imageReference).into(myImage);
-        //Picasso.get().load(url).into(myImage);
 
         myText.setText(images.get(position));
 

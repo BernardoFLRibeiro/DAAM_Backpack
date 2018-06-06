@@ -12,8 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,7 +24,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class AnexarFicheiro_Activity extends MenuPage{
@@ -51,9 +48,6 @@ public class AnexarFicheiro_Activity extends MenuPage{
     private ImageButton mGaleriaButton;
 
 
-    //private FirebaseAuth auth;
-    //private FirebaseUser user;
-    //private String currentUser;
 
     private UploadListAdapter mUploadListAdapter;
 
@@ -179,12 +173,6 @@ public class AnexarFicheiro_Activity extends MenuPage{
 
         Uri uri = data.getData();
 
-        //ImageView mImageBitmap = (ImageView) findViewById(R.id.cameraImage);
-        //TextView mTextBitmap = (TextView) findViewById(R.id.cameraText);
-
-        //mTextBitmap.setText(fileName);
-        //mImageBitmap.setImageURI(uri);
-
         mListImageInformation.add(new ObjectInformation(fileName, uri));
 
         StorageReference filePath = mStorageReference.child("FicheirosAnexados").child(mNomeRegisto.getText().toString()).child(fileName);
@@ -219,31 +207,6 @@ public class AnexarFicheiro_Activity extends MenuPage{
         mRecyclerView.setAdapter(mUploadListAdapter);
     }
 
-    //obter dados da camera
-    /*public void getCameraData(Intent data){
-
-        mProgressDialog.setMessage("A carregar...");
-        mProgressDialog.show();
-
-        mGaleriaButton.setEnabled(false);
-
-        Bundle extras = data.getExtras();
-        Bitmap imageBitmap = (Bitmap) extras.get("data");
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-
-
-
-        ImageView mImageBitmap = (ImageView) findViewById(R.id.cameraImage);
-        TextView mTextBitmap = (TextView) findViewById(R.id.cameraText);
-        mFotoRegisto = imageBitmap;
-
-        fromCamera = true;
-
-        mTextBitmap.setText(mNomeRegisto.getText().toString() + "_foto");
-        mImageBitmap.setImageBitmap(imageBitmap);
-        mProgressDialog.dismiss();
-    }*/
 
 
 }

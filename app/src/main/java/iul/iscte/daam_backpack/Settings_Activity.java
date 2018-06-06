@@ -124,29 +124,6 @@ public class Settings_Activity extends MenuPage {
                         editTPop.append("" + actualValue[0]);
 
 
-
-
-
-                    /*    alertDialogBuilder
-                                .setCancelable(false)
-                                .setPositiveButton("OK",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-
-
-                                            }
-                                        }
-                                )
-                                .
-
-                                        setNegativeButton("Cancel",
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog,
-                                                                        int id) {
-                                                        dialog.cancel();
-                                                    }
-                                                });
-*/
                         if (promptsView.getParent() != null) {
                             ((ViewGroup) promptsView.getParent()).removeView(promptsView);
                         }
@@ -174,7 +151,6 @@ public class Settings_Activity extends MenuPage {
         ref.child("users").child(key).child(variableToChange).setValue(response);
         alertDialog.cancel();
         loadName();
-
     }
 
     public void OnclickCancelar(View view) {
