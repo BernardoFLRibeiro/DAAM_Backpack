@@ -126,13 +126,12 @@ public class Registo extends AppCompatActivity {
     private void saveToDatabse() {
         mFirebaseInstance = FirebaseDatabase.getInstance();
 
-        // get reference to 'users' node
+        // get reference to 'users'
         mFirebaseDatabase = mFirebaseInstance.getReference("users");
 
-        // store app title to 'app_title' node
+        // store app title to 'BackPack'
         mFirebaseInstance.getReference("title").setValue("BackPack");
 
-        // app_title change listener
         mFirebaseInstance.getReference("title").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
