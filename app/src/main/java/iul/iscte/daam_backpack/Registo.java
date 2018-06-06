@@ -29,7 +29,6 @@ public class Registo extends AppCompatActivity {
     private Button Registo;
     private FirebaseAuth firebaseAuth;
     private String user_name, user_password, user_university, user_course, user_email;
-    private DB database;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private String userId;
@@ -42,7 +41,6 @@ public class Registo extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        database = new DB(this);
 
         Registo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +58,6 @@ public class Registo extends AppCompatActivity {
                             if (task.isSuccessful()) {
 //                              sendUserData();
                                 saveToDatabse();
-                                database.insertUser(user_name, user_email, user_password, user_university);
                                 Toast.makeText(Registo.this, "Sucesso", Toast.LENGTH_LONG);
                                 startActivity(new Intent(Registo.this, HomePage.class));
                             } else {
