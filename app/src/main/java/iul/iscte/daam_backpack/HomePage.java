@@ -69,34 +69,37 @@ public class HomePage extends MenuPage {
     public void populateRecentList(){
 
 
-        myRef.orderByChild("dataPublicacao").limitToFirst(5).addValueEventListener(new ValueEventListener() {
+        Query recentAnexos = myRef.orderByChild("dataPublicacao").limitToLast(5);
+        recentAnexos.addValueEventListener(new ValueEventListener(){
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    mListRecentAnexos = new ArrayList<Resumo>();
+                    for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                        Resumo resumo = postSnapshot.getValue(Resumo.class);
+                        mListRecentAnexos.add(resumo);
+                    }
+                    Collections.reverse(mListRecentAnexos);
+                    mRecentListAdapter = new ListAnexoAdapter(mListRecentAnexos);
+                    recyclerViewRecent.setAdapter(mRecentListAdapter);
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Resumo resumo = postSnapshot.getValue(Resumo.class);
-                    mListRecentAnexos.add(resumo);
                 }
-                Collections.reverse(mListRecentAnexos);
-                mRecentListAdapter = new ListAnexoAdapter(mListRecentAnexos);
-                recyclerViewRecent.setAdapter(mRecentListAdapter);
 
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                }
+            });
 
-            }
-        });
     }
 
     public void populatePopularList(){
 
-        Query pupularAnexos = myRef.orderByChild("acessos").limitToFirst(5);
+        Query pupularAnexos = myRef.orderByChild("acessos").limitToLast(5);
         pupularAnexos.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mListPopularAnexos = new ArrayList<Resumo>();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Resumo resumo = postSnapshot.getValue(Resumo.class);
                     mListPopularAnexos.add(resumo);
